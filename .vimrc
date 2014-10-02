@@ -37,11 +37,10 @@ Plugin 'darkwind-mt/bluespec'
 Plugin 'dag/vim-fish'
 
 Plugin 'christoomey/vim-tmux-navigator'
-Plugin 'cirqueit/chrome'
 Plugin 'kien/ctrlp.vim'
-Plugin 'scrooloose/syntastic'
-Plugin 'cirqueit/rainbow'
 Plugin 'benmills/vimux'
+Plugin 'cirqueit/rainbow'
+Plugin 'cirqueit/chrome'
 
 Plugin 'Valloric/YouCompleteMe'
 call vundle#end()
