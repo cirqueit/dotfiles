@@ -1,6 +1,4 @@
-alias vim="/Applications/MacVim.app/Contents/MacOS/Vim"
 alias tmux="tmux -2"
-alias reattach-to-user-namespace=''
 alias pbcopy='xclip -selection clipboard'
 alias pbpaste='xclip -selection clipboard -o'
 
