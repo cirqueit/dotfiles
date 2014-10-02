@@ -51,7 +51,7 @@ let g:syntastic_python_checkers = ['flake8']
 let g:sexp_filetypes = 'clojure,scheme,lisp,timl,hy'
 
 let g:rainbow_active = 1
-let g:rainbow_ctermfgs = ['231', '46', '85', '33', '93', '205']
+let g:rainbow_ctermfgs = ['231', '119', '85', '33', '99', '92', '204']
 
 let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP'
@@ -99,7 +99,7 @@ function! Insta()
     if &ft=='clojure'
         silent Require!
         call feedkeys("mxcpp`x")
-    elseif &ft =~ '.*\(python\|javascript\|coffeescript\).*'
+    elseif &ft =~ '.*\(python\|javascript\|coffee\).*'
         call feedkeys("V\<Space>\<Space>")
     else
         if !exists("g:VimuxRunnerIndex") || _VimuxHasRunner(g:VimuxRunnerIndex) == -1
@@ -120,7 +120,7 @@ function! InstaREPL()
             call VimuxRunCommand("ipython")
         elseif &ft =~ 'javascript'
             call VimuxRunCommand("node")
-        elseif &ft =~ 'coffeescript'
+        elseif &ft =~ 'coffee'
             call VimuxRunCommand("coffee")
         endif
     endif
@@ -134,5 +134,6 @@ let mapleader = " "
 vmap <silent> <Leader><Space> "vy :call InstaREPL()<CR>
 nmap <silent> <Leader><Space> :call Insta()<CR>
 nmap <silent> <Leader>c :call VimuxPromptCommand()<CR>
+nmap <silent> <Leader>x :call VimuxCloseRunner()<CR>
 let g:VimuxOrientation = "h"
 let g:VimuxHeight = "33"

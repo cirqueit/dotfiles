@@ -16,8 +16,8 @@ function fish_prompt
     echo -n  (prompt_pwd)
     if test $TERM = "screen-256color"
         if test -n $TMUX
-            set_color cyan 
+            set_color 5fffaf 
         end
     end
-    echo -n ' > '
+    echo -n ' ❯ '
 end
