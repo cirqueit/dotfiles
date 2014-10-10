@@ -1,6 +1,12 @@
 alias vim="/Applications/MacVim.app/Contents/MacOS/Vim"
 alias tmux="tmux -2"
 
+alias smux="tmux -S /tmp/shared"
+# share sock -> chmod 777 /tmp/shared
+# pair       -> smux a
+# read-only  -> smux a -r
+# free       -> smux new -t 0"
+
 set PATH ~/bin/ $PATH
 
 set --erase fish_greeting

@@ -6,10 +6,10 @@ Plugin 'gmarik/Vundle.vim'
 Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-unimpaired'
 Plugin 'tpope/vim-speeddating'
-Plugin 'tpope/vim-classpath'
-Plugin 'tpope/vim-fireplace'
+" Plugin 'tpope/vim-classpath'
 Plugin 'tpope/vim-leiningen'
 Plugin 'tpope/vim-projectionist'
+Plugin 'tpope/vim-fireplace'
 Plugin 'tpope/vim-dispatch'
 Plugin 'tpope/vim-repeat'
 Plugin 'tpope/vim-fugitive'
@@ -95,6 +95,7 @@ cmap w!! w !sudo tee > /dev/null %
 
 
 function! Insta()
+    silent w
     if &ft=='clojure'
         silent Require!
         call feedkeys("mxcpp`x")
@@ -113,6 +114,7 @@ function! Insta()
 endfunction
 
 function! InstaREPL()
+    silent w
     if !exists("g:VimuxRunnerIndex") || _VimuxHasRunner(g:VimuxRunnerIndex) == -1
         call VimuxOpenRunner()
         if &ft =~ 'python'
