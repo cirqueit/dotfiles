@@ -138,3 +138,4 @@ nmap <silent> <Leader>c :call VimuxPromptCommand()<CR>
 nmap <silent> <Leader>x :call VimuxCloseRunner()<CR>
 let g:VimuxOrientation = "h"
 let g:VimuxHeight = "33"
+set shell=/bin/bash
