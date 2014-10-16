@@ -6,7 +6,6 @@ Plugin 'gmarik/Vundle.vim'
 Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-unimpaired'
 Plugin 'tpope/vim-speeddating'
-" Plugin 'tpope/vim-classpath'
 Plugin 'tpope/vim-leiningen'
 Plugin 'tpope/vim-projectionist'
 Plugin 'tpope/vim-fireplace'
@@ -100,7 +99,7 @@ function! Insta()
         silent Require!
         call feedkeys("mxcpp`x")
     elseif &ft =~ '.*\(python\|javascript\|coffee\).*'
-        call feedkeys("V\<Space>\<Space>")
+        call feedkeys("mxV\<Space>\<Space>`x")
     else
         if !exists("g:VimuxRunnerIndex") || _VimuxHasRunner(g:VimuxRunnerIndex) == -1
             call VimuxOpenRunner()
@@ -124,11 +123,18 @@ function! InstaREPL()
         elseif &ft =~ 'coffee'
             call VimuxRunCommand("coffee")
         endif
+        sleep 400m
     endif
     call VimuxSendText(@v)
     if @v[-1:] != "\n"
         call VimuxSendKeys("Enter")
     endif
+    sleep 50m
+    call system("tmux copy-mode -t ".g:VimuxRunnerIndex)
+    call system("tmux send-keys -t ".g:VimuxRunnerIndex." kvky")
+    sleep 50m
+    let @+ = substitute(@+, '^\n\s*', "", "")
+    echomsg @+
 endfunction
 
 let mapleader = " "
@@ -136,6 +142,7 @@ vmap <silent> <Leader><Space> "vy :call InstaREPL()<CR>
 nmap <silent> <Leader><Space> :call Insta()<CR>
 nmap <silent> <Leader>c :call VimuxPromptCommand()<CR>
 nmap <silent> <Leader>x :call VimuxCloseRunner()<CR>
-let g:VimuxOrientation = "h"
-let g:VimuxHeight = "33"
+let g:VimuxUseNearest = 0
+let g:VimuxRunnerType = "window"
+
 set shell=/bin/bash
