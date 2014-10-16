@@ -25,5 +25,8 @@ function fish_prompt
     echo -n ' ❯ '
 end
 
-. .config/fish/osx.fish
-. .config/fish/linux.fish
+if test (uname) = "Darwin"
+    . .config/fish/config.osx.fish
+else
+    . .config/fish/config.linux.fish
+end
