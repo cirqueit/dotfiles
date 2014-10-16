@@ -1,9 +1,11 @@
 #!/bin/bash
 
 mkdir -p ~/.config/fish
+mkdir -p ~/.ipython/profile_default
 ln -s $(pwd)/config.fish ~/.config/fish/config.fish
 ln -s $(pwd)/.vimrc  ~/.vimrc
 ln -s $(pwd)/.tmux.conf ~/.tmux.conf
+ln -s $(pwd)/ipython_config.py ~/.ipython/profile_default/ipython_config.py
 
 if [ "$(uname)" == "Darwin" ]; then
     ln -s $(pwd)/config.osx.fish ~/.config/fish/config.osx.fish
