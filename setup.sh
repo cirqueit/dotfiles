@@ -13,4 +13,6 @@ else
     ln -s $(pwd)/.tmux.linux.conf ~/.tmux.linux.conf
 fi
 
-git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+# git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+mkdir -p ~/.vim/autoload
+curl -fLo ~/.vim/autoload/plug.vim https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim

@@ -1,55 +1,52 @@
-set nocompatible
-filetype off             
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-Plugin 'gmarik/Vundle.vim'
-Plugin 'tpope/vim-surround'
-Plugin 'tpope/vim-unimpaired'
-Plugin 'tpope/vim-speeddating'
-Plugin 'tpope/vim-leiningen'
-Plugin 'tpope/vim-projectionist'
-Plugin 'tpope/vim-fireplace'
-Plugin 'tpope/vim-dispatch'
-Plugin 'tpope/vim-repeat'
-Plugin 'tpope/vim-fugitive'
-Plugin 'tpope/vim-commentary'
-Plugin 'tpope/vim-vinegar'
-Plugin 'tpope/vim-sensible'
+call plug#begin()
+Plug 'gmarik/Vundle.vim'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-unimpaired'
+Plug 'tpope/vim-speeddating'
+Plug 'tpope/vim-leiningen'
+Plug 'tpope/vim-projectionist'
+Plug 'tpope/vim-fireplace'
+Plug 'tpope/vim-dispatch'
+Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-vinegar'
+Plug 'tpope/vim-sensible'
 
-Plugin 'guns/vim-clojure-static'
-Plugin 'guns/vim-clojure-highlight'
-Plugin 'guns/vim-sexp'
-Plugin 'tpope/vim-sexp-mappings-for-regular-people'
+Plug 'guns/vim-clojure-static'
+Plug 'guns/vim-clojure-highlight'
+Plug 'guns/vim-sexp'
+Plug 'tpope/vim-sexp-mappings-for-regular-people'
 
-Plugin 'tpope/vim-markdown'
-Plugin 'tpope/vim-haml'
-Plugin 'elzr/vim-json'
-Plugin 'derekwyatt/vim-scala'
-Plugin 'hylang/vim-hy'
-Plugin 'pangloss/vim-javascript'
-Plugin 'kchmck/vim-coffee-script'
-Plugin 'digitaltoad/vim-jade'
-Plugin 'wavded/vim-stylus'
-Plugin 'othree/html5.vim'
-Plugin 'othree/javascript-libraries-syntax.vim'
-Plugin 'darkwind-mt/bluespec'
-Plugin 'dag/vim-fish'
+Plug 'tpope/vim-markdown'
+Plug 'tpope/vim-haml'
+Plug 'elzr/vim-json'
+Plug 'derekwyatt/vim-scala'
+Plug 'hylang/vim-hy'
+Plug 'pangloss/vim-javascript'
+Plug 'kchmck/vim-coffee-script'
+Plug 'digitaltoad/vim-jade'
+Plug 'wavded/vim-stylus'
+Plug 'othree/html5.vim'
+Plug 'othree/javascript-libraries-syntax.vim'
+Plug 'darkwind-mt/bluespec'
+Plug 'dag/vim-fish'
 
-Plugin 'christoomey/vim-tmux-navigator'
-Plugin 'kien/ctrlp.vim'
-Plugin 'benmills/vimux'
-Plugin 'cirqueit/rainbow'
-Plugin 'cirqueit/chrome'
+Plug 'christoomey/vim-tmux-navigator'
+Plug 'kien/ctrlp.vim'
+Plug 'benmills/vimux'
+Plug 'cirqueit/rainbow'
+Plug 'cirqueit/chrome'
 
-Plugin 'Valloric/YouCompleteMe'
-call vundle#end()
+Plug 'Valloric/YouCompleteMe'
+call plug#end()
 runtime! plugin/sensible.vim
 
 let g:syntastic_python_checkers = ['flake8']
 let g:sexp_filetypes = 'clojure,scheme,lisp,timl,hy'
 
 let g:rainbow_active = 1
-let g:rainbow_ctermfgs = ['231', '119', '85', '33', '99', '92', '204']
+let g:rainbow_ctermfgs = ['119', '85', '33', '99', '92', '204', '231']
 
 let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP'
