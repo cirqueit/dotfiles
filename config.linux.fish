@@ -1,24 +1,33 @@
-alias tmux="tmux -2"
 alias pbcopy='xclip -selection clipboard'
 alias pbpaste='xclip -selection clipboard -o'
 
-set PATH ~/bin/ $PATH
-
-set --erase fish_greeting
-set -xU LSCOLORS "ExGxFxdxCxfxDxxbadacad"
-
-function fish_user_key_bindings
-    fish_vi_key_bindings
-    bind -M insert \cf forward-char
+function psof
+    switch (count $argv)
+        case 0
+            quartus_pgm -m JTAG -o "p;vblox1.sof"
+        case \*
+            quartus_pgm -m JTAG -c $argv[1] -o "p;vblox1.sof"
+    end
 end
 
-function fish_prompt
-    set_color normal
-    echo -n  (prompt_pwd)
-    if test $TERM = "screen-256color"
-        if test -n $TMUX
-            set_color 5fffaf 
-        end
+function pelf
+    switch (count $argv)
+        case 0
+            nios2-download -r -g *.elf
+        case \*
+            nios2-download -r -g -c $argv[1] *.elf
     end
-    echo -n ' ❯ '
+end
+
+function perm
+    switch (count $argv)
+        case 0
+            nios2-terminal
+        case \*
+            nios2-terminal -c $argv[1]
+    end
+end
+
+function pet
+    pelf $argv ;and perm $argv
 end

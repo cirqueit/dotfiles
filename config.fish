@@ -5,6 +5,17 @@ alias smux="tmux -S /tmp/shared"
 # read-only  -> smux a -r
 # free       -> smux new -t 0"
 
+alias tl='tmux ls'
+
+function ta
+    switch (count $argv)
+        case 0
+            tmux attach 
+        case \*
+            tmux attach -t $argv
+    end
+end
+
 set PATH ~/bin/ $PATH
 
 set --erase fish_greeting
