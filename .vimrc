@@ -1,5 +1,4 @@
 call plug#begin()
-Plug 'gmarik/Vundle.vim'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-speeddating'
@@ -38,7 +37,7 @@ Plug 'benmills/vimux'
 Plug 'cirqueit/rainbow'
 Plug 'cirqueit/chrome'
 
-Plug 'Valloric/YouCompleteMe'
+Plug 'Valloric/YouCompleteMe', {'do': './install.sh'}
 call plug#end()
 runtime! plugin/sensible.vim
 
