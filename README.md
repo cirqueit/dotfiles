@@ -65,7 +65,7 @@
     
     git clone git://github.com/cirqueit/dotfiles
     cd dotfiles && ./setup.sh
-    vim -> :BundleInstall
+    vim -> :PlugInstall
 
 ### others
 
