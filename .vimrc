@@ -81,11 +81,7 @@ set expandtab
 set hlsearch
 nnoremap <silent> <CR> mx:nohlsearch<CR><CR>`x
 
-if has('unnamedplus')
-    set clipboard=unnamedplus
-else
-    set clipboard=unnamed
-endif
+set clipboard=unnamedplus
 
 cmap w!! w !sudo tee > /dev/null %
 
@@ -133,7 +129,8 @@ function! InstaREPL()
     call system("tmux copy-mode -t ".g:VimuxRunnerIndex)
     call system("tmux send-keys -t ".g:VimuxRunnerIndex." kvky")
     sleep 50m
-    let @+ = substitute(@+, '^\n\s*', "", "")
+    let @+ = substitute(@+, '^\n*\s*', "", "")
+    let @+ = substitute(@+, '\n*$', "", "")
     echomsg @+
 endfunction
 
