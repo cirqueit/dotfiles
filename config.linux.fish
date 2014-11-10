@@ -1,6 +1,3 @@
-alias pbcopy='xclip -selection clipboard'
-alias pbpaste='xclip -selection clipboard -o'
-
 function psof
     switch (count $argv)
         case 0
