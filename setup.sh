@@ -1,7 +1,8 @@
 #!/bin/bash
 
-ln -s $(pwd)/.vimrc  ~/.vimrc
-ln -s $(pwd)/.tmux.conf ~/.tmux.conf
+ln -sf $(pwd)/.vimrc  ~/.vimrc
+ln -sf $(pwd)/.tmux.conf ~/.tmux.conf
+ln -sf $(pwd)/.bash_aliases ~/.bash_aliases
 
 if [ "$(uname)" == "Darwin" ]; then
     mkdir -p ~/.ipython/profile_default
