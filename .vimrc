@@ -53,9 +53,9 @@ Plug 'dag/vim-fish'
 
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'benmills/vimux'
-Plug 'cirqueit/rainbow'
 Plug 'cirqueit/chrome'
 
+Plug 'junegunn/rainbow_parentheses.vim'
 Plug 'junegunn/vim-peekaboo'
 Plug 'junegunn/fzf', {'dir': '~/.fzf', 'do': 'yes \| ./install'}
 Plug 'Valloric/YouCompleteMe', {'do': './install.sh --clang-completer'}
@@ -64,8 +64,19 @@ runtime! plugin/sensible.vim
 
 let g:sexp_filetypes = 'clojure,scheme,lisp,timl,hy'
 
-let g:rainbow_active = 1
-let g:rainbow_ctermfgs = ['119', '85', '33', '99', '92', '204', '231']
+let g:rainbow#max_level = 16
+let g:rainbow#pairs = [['(', ')'], ['[', ']'], ['{', '}']]
+let g:rainbow#colors = {
+\   'dark': [
+\     ['119', 'white'],
+\     ['85',  'white'],
+\     ['33',  'white'],
+\     ['99',  'white'],
+\     ['92',  'white'],
+\     ['204', 'white'],
+\     ['231', 'white']
+\   ]}
+au VimEnter * RainbowParentheses
 
 set laststatus=0
 
@@ -81,6 +92,7 @@ set smartcase
 set title
 set splitbelow
 set splitright
+set foldlevel=99
 
 set t_Co=256
 set background=dark
