@@ -33,7 +33,7 @@
     sudo apt-get install git build-essential xclip automake autoconf
     sudo apt-get install libevent-dev libncurses-dev pkg-config
     sudo apt-get install nodejs nodejs-legacy npm
-    sudo apt-get install curl
+    sudo apt-get install curl cmake python-dev
 
 ## all
 
