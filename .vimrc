@@ -1,4 +1,24 @@
+if has('nvim')
+    filetype off
+    set rtp+=~/.vim/bundle/Vundle.vim
+    call vundle#begin()
+    Plugin 'gmarik/Vundle.vim'
+    Plugin 'floobits/floobits-neovim'
+    call vundle#end()
+    filetype plugin indent on
+endif
+
+if has('nvim')
+    runtime! python_setup.vim
+    set unnamedclip
+endif
+
+set rtp+=~/.fzf
+
 call plug#begin()
+if has ('nvim')
+    Plug 'floobits/floobits-neovim'
+endif
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-speeddating'
@@ -17,7 +37,7 @@ Plug 'guns/vim-clojure-highlight'
 Plug 'guns/vim-sexp'
 Plug 'tpope/vim-sexp-mappings-for-regular-people'
 
-Plug 'tpope/vim-markdown'
+Plug 'plasticboy/vim-markdown'
 Plug 'tpope/vim-haml'
 Plug 'elzr/vim-json'
 Plug 'derekwyatt/vim-scala'
@@ -32,23 +52,20 @@ Plug 'darkwind-mt/bluespec'
 Plug 'dag/vim-fish'
 
 Plug 'christoomey/vim-tmux-navigator'
-Plug 'kien/ctrlp.vim'
 Plug 'benmills/vimux'
 Plug 'cirqueit/rainbow'
 Plug 'cirqueit/chrome'
 
-Plug 'Valloric/YouCompleteMe', {'do': './install.sh'}
+Plug 'junegunn/vim-peekaboo'
+Plug 'junegunn/fzf', {'dir': '~/.fzf', 'do': 'yes \| ./install'}
+Plug 'Valloric/YouCompleteMe', {'do': './install.sh --clang-completer'}
 call plug#end()
 runtime! plugin/sensible.vim
 
-let g:syntastic_python_checkers = ['flake8']
 let g:sexp_filetypes = 'clojure,scheme,lisp,timl,hy'
 
 let g:rainbow_active = 1
 let g:rainbow_ctermfgs = ['119', '85', '33', '99', '92', '204', '231']
-
-let g:ctrlp_map = '<c-p>'
-let g:ctrlp_cmd = 'CtrlP'
 
 set laststatus=0
 
@@ -77,7 +94,7 @@ set expandtab
 set hlsearch
 nnoremap <silent> <CR> mx:nohlsearch<CR><CR>`x
 
-set clipboard=unnamedplus
+set clipboard=unnamed,unnamedplus
 
 cmap w!! w !sudo tee > /dev/null %
 
@@ -97,8 +114,12 @@ function! Insta()
             call VimuxOpenRunner()
         endif
         if !exists("g:VimuxLastCommand")
+            let g:VimuxPromptString = "Environment? "
+            call VimuxPromptCommand()
+            let g:VimuxPromptString = "Command? "
             call VimuxPromptCommand()
         else
+            call VimuxInterruptRunner()
             call VimuxRunLastCommand()
         endif
     endif
@@ -125,9 +146,11 @@ function! InstaREPL()
     call system("tmux copy-mode -t ".g:VimuxRunnerIndex)
     call system("tmux send-keys -t ".g:VimuxRunnerIndex." kvky")
     sleep 50m
-    let @+ = substitute(@+, '^\n*\s*', "", "")
-    let @+ = substitute(@+, '\n*$', "", "")
-    echomsg @+
+    let ans = @+
+    let ans = substitute(ans, '^\n*\s*', "", "")
+    let ans = substitute(ans, '\n*$', "", "")
+    let @+ = ans
+    echomsg ans
 endfunction
 
 let mapleader = " "
@@ -137,5 +160,7 @@ nmap <silent> <Leader>c :call VimuxPromptCommand()<CR>
 nmap <silent> <Leader>x :call VimuxCloseRunner()<CR>
 let g:VimuxUseNearest = 0
 let g:VimuxRunnerType = "window"
+
+nmap <c-p> :FZF<CR>
 
 set shell=/bin/bash

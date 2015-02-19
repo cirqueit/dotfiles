@@ -19,6 +19,7 @@
     passwd xxx
     vim /etc/sudoers
     xxx ALL=(ALL:ALL) ALL
+    chsh -s /bin/bash xxx
 
 ###add ssh key
 
@@ -32,6 +33,7 @@
     sudo apt-get install git build-essential xclip automake autoconf
     sudo apt-get install libevent-dev libncurses-dev pkg-config
     sudo apt-get install nodejs nodejs-legacy npm
+    sudo apt-get install curl
 
 ## all
 
@@ -41,17 +43,6 @@
     cd tmux
     sh autogen.sh
     ./configure && make
-
-### fish
-
-    git clone git://github.com/fish-shell/fish-shell
-    autoconf
-    ./configure
-    make
-    sudo make install
-    sudo vim /etc/shells   -> add /usr/local/bin/fish to end of list
-    sudo vim /etc/passwd   -> add /usr/local/bin/fish to end of users
-
 
 ### npm
     
