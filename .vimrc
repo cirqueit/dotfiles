@@ -55,6 +55,8 @@ Plug 'christoomey/vim-tmux-navigator'
 Plug 'benmills/vimux'
 Plug 'cirqueit/chrome'
 
+Plug 'wikitopian/hardmode'
+
 Plug 'junegunn/rainbow_parentheses.vim'
 Plug 'junegunn/vim-peekaboo'
 Plug 'junegunn/fzf', {'dir': '~/.fzf', 'do': 'yes \| ./install'}
@@ -77,6 +79,9 @@ let g:rainbow#colors = {
 \     ['231', 'white']
 \   ]}
 au VimEnter * RainbowParentheses
+
+autocmd VimEnter,BufNewFile,BufReadPost * silent! call HardMode()
+nnoremap <leader>h <Esc>:call ToggleHardMode()<CR>
 
 set laststatus=0
 
