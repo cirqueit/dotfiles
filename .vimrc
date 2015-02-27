@@ -55,8 +55,6 @@ Plug 'christoomey/vim-tmux-navigator'
 Plug 'benmills/vimux'
 Plug 'cirqueit/chrome'
 
-Plug 'wikitopian/hardmode'
-
 Plug 'junegunn/rainbow_parentheses.vim'
 Plug 'junegunn/vim-peekaboo'
 Plug 'junegunn/fzf', {'dir': '~/.fzf', 'do': 'yes \| ./install'}
