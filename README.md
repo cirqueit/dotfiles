@@ -7,9 +7,10 @@
     apt-get update
     apt-get upgrade
     apt-get install sudo
-    apt-get install git build-essential xclip automake autoconf clang
+    apt-get install git build-essential xclip automake autoconf
     apt-get install libevent-dev libncurses-dev pkg-config
-    apt-get install wget zip curl cmake python-dev xcape
+    apt-get install wget zip curl cmake python-dev
+    apt-get install clang ipython xcape vim-gnome
 
 ### install openvpn-as
 

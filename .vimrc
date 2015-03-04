@@ -110,7 +110,11 @@ set expandtab
 set hlsearch
 nnoremap <silent> <CR> mx:nohlsearch<CR><CR>`x
 
-set clipboard=unnamed,unnamedplus
+if has('unnamedplus')
+    set clipboard=unnamedplus
+else
+    set clipboard=unnamed
+endif
 
 cmap w!! w !sudo tee > /dev/null %
 
