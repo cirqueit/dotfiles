@@ -79,6 +79,9 @@ let g:rainbow#colors = {
 \   ]}
 au VimEnter * RainbowParentheses
 
+autocmd VimEnter,BufNewFile,BufReadPost * silent! call HardMode()
+nnoremap <leader>h <Esc>:call ToggleHardMode()<CR>
+
 set laststatus=0
 
 map Y y$
