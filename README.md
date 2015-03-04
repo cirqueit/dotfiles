@@ -1,19 +1,27 @@
-# Fresh deploy
+# Fresh Ubuntu deploy
 
-## osx
+## as root
 
-- iterm2
-- homebrew
+### install basics
+    
+    apt-get update
+    apt-get upgrade
+    apt-get install sudo
+    apt-get install git build-essential xclip automake autoconf clang
+    apt-get install libevent-dev libncurses-dev pkg-config
+    apt-get install wget zip curl cmake python-dev xcape
 
-### brew
+### install openvpn-as
 
-- reattach-to-user-namespace
-- git
-- macvim
+    > 32 bit
+    wget http://swupdate.openvpn.org/as/openvpn-as-2.0.12-Ubuntu14.i386.deb
+    dpkg -i openvpn-as-2.0.12-Ubuntu14.i386.deb
+    > 64 bit
+    ?
 
-## linux
+    passwd openvpn
 
-###add users
+### add users
 
     useradd -d /home/xxx -m xxx
     passwd xxx
@@ -21,21 +29,12 @@
     xxx ALL=(ALL:ALL) ALL
     chsh -s /bin/bash xxx
 
-###add ssh key
+## as user
+
+### add ssh key
 
     mkdir -p .ssh
     scp .ssh/id_rsa.pub server:.ssh/authorized_keys
-
-#update apt-get and install basics
-    
-    sudo apt-get update
-    sudo apt-get upgrade
-    sudo apt-get install git build-essential xclip automake autoconf
-    sudo apt-get install libevent-dev libncurses-dev pkg-config
-    sudo apt-get install nodejs nodejs-legacy npm
-    sudo apt-get install curl cmake python-dev
-
-## all
 
 ### tmux
 
@@ -43,14 +42,24 @@
     cd tmux
     sh autogen.sh
     ./configure && make
+    sudo make install
 
-### npm
+### iojs + npm
+
+    git clone git://github.com/iojs/io.js
+    cd io.js
+    export CC=/usr/bin/clang
+    export CXX=/usr/bin/clang++
+    ./configure && make
+    sudo make install
     
-    sudo npm install -g bower
-    sudo npm install -g coffee-script
-    sudo npm install -g gulp
-    sudo npm install -g slush
-    sudo npm install -g cirqueit/slush-soda
+    sudo chown -R $USER /usr/local
+
+    npm install -g bower
+    npm install -g coffee-script
+    npm install -g gulp
+    npm install -g slush
+    npm install -g cirqueit/slush-soda
 
 ### dotfiles
     
@@ -59,6 +68,10 @@
     vim -> :PlugInstall
 
 ### others
+
+    sudo add-apt-repository ppa:webupd8team/java
+    sudo apt-get update
+    sudo apt-get install oracle-java8-installer
 
 - leiningen (requires java)
 - google drive

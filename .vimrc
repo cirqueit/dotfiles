@@ -51,6 +51,7 @@ Plug 'othree/javascript-libraries-syntax.vim'
 Plug 'darkwind-mt/bluespec'
 Plug 'dag/vim-fish'
 
+Plug 'wellle/tmux-complete.vim'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'benmills/vimux'
 Plug 'cirqueit/chrome'
@@ -165,6 +166,7 @@ function! InstaREPL()
     echomsg ans
 endfunction
 
+let g:matchparen_insert_timeout = 5
 let mapleader = " "
 vmap <silent> <Leader><Space> "vy :call InstaREPL()<CR>
 nmap <silent> <Leader><Space> :call Insta()<CR>
