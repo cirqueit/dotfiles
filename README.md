@@ -61,6 +61,8 @@
     npm install -g gulp
     npm install -g slush
     npm install -g cirqueit/slush-soda
+    npm install -g babel
+    npm install -g react-tools
 
 ### dotfiles
     

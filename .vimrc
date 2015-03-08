@@ -43,6 +43,7 @@ Plug 'elzr/vim-json'
 Plug 'derekwyatt/vim-scala'
 Plug 'hylang/vim-hy'
 Plug 'pangloss/vim-javascript'
+Plug 'mxw/vim-jsx'
 Plug 'kchmck/vim-coffee-script'
 Plug 'digitaltoad/vim-jade'
 Plug 'wavded/vim-stylus'
@@ -64,6 +65,8 @@ call plug#end()
 runtime! plugin/sensible.vim
 
 let g:sexp_filetypes = 'clojure,scheme,lisp,timl,hy'
+
+let g:jsx_ext_required = 0
 
 let g:rainbow#max_level = 16
 let g:rainbow#pairs = [['(', ')'], ['[', ']'], ['{', '}']]
