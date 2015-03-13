@@ -85,7 +85,10 @@ au VimEnter * RainbowParentheses
 autocmd VimEnter,BufNewFile,BufReadPost * silent! call HardMode()
 nnoremap <leader>h <Esc>:call ToggleHardMode()<CR>
 
+set backspace=indent,eol,start
 set laststatus=0
+set nocompatible
+set shortmess=at
 
 map Y y$
 nmap <F1> <nop>
