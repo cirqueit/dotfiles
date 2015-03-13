@@ -185,6 +185,6 @@ nmap <silent> <Leader>x :call VimuxCloseRunner()<CR>
 let g:VimuxUseNearest = 0
 let g:VimuxRunnerType = "window"
 
-nmap <c-p> :FZF<CR>
+nmap <c-t> :FZF<CR>
 
 set shell=/bin/bash
