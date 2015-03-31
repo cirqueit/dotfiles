@@ -56,6 +56,7 @@ Plug 'wellle/tmux-complete.vim'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'benmills/vimux'
 Plug 'cirqueit/chrome'
+Plug 'cirqueit/vim-invert-marks'
 
 Plug 'junegunn/rainbow_parentheses.vim'
 Plug 'junegunn/vim-peekaboo'
@@ -90,9 +91,15 @@ set laststatus=0
 set nocompatible
 set shortmess=at
 
-map Y y$
+nnoremap Y y$
+nnoremap Q @q
+vnoremap Q :norm @q<cr>
+vnoremap < <gv
+vnoremap > >gv
+
 nmap <F1> <nop>
-set pastetoggle=<F2>
+
+set pastetoggle=<Leader>P
 
 set hidden
 set wildmode=list:longest
