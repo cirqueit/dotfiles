@@ -16,3 +16,6 @@ fi
 
 mkdir -p ~/.vim/autoload
 curl -fLo ~/.vim/autoload/plug.vim https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+
+ln -sf ~/.vimrc  ~/.nvimrc
+ln -sf ~/.vim  ~/.nvim

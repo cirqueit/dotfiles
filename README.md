@@ -41,9 +41,19 @@
 
     git clone git://git.code.sf.net/p/tmux/tmux-code tmux
     cd tmux
+    curl -O https://gist.githubusercontent.com/ArnisL/6156593/raw/fdacd42e7a4ce725605c52655fcc04126630a7e6/tmux_24_bit_colours.c
+    git apply tmux_24_bit_colors.c
     sh autogen.sh
     ./configure && make
     sudo make install
+
+### neovim
+
+    git clone https://github.com/neovim/neovim
+    cd neovim
+    make
+    sudo make install
+    pip install neovim
 
 ### iojs + npm
 
