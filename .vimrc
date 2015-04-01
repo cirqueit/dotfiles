@@ -1,18 +1,3 @@
-if has('nvim')
-    filetype off
-    set rtp+=~/.vim/bundle/Vundle.vim
-    call vundle#begin()
-    Plugin 'gmarik/Vundle.vim'
-    Plugin 'floobits/floobits-neovim'
-    call vundle#end()
-    filetype plugin indent on
-endif
-
-if has('nvim')
-    runtime! python_setup.vim
-    set unnamedclip
-endif
-
 set rtp+=~/.fzf
 
 call plug#begin()
@@ -37,6 +22,8 @@ Plug 'guns/vim-clojure-highlight'
 Plug 'guns/vim-sexp'
 Plug 'tpope/vim-sexp-mappings-for-regular-people'
 
+Plug 'davidhalter/jedi-vim'
+
 Plug 'plasticboy/vim-markdown'
 Plug 'tpope/vim-haml'
 Plug 'elzr/vim-json'
@@ -55,12 +42,13 @@ Plug 'dag/vim-fish'
 Plug 'wellle/tmux-complete.vim'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'benmills/vimux'
+
 Plug 'cirqueit/chrome'
+Plug 'cirqueit/vim-invert-marks'
 
 Plug 'junegunn/rainbow_parentheses.vim'
 Plug 'junegunn/vim-peekaboo'
 Plug 'junegunn/fzf', {'dir': '~/.fzf', 'do': 'yes \| ./install'}
-Plug 'Valloric/YouCompleteMe', {'do': './install.sh --clang-completer'}
 call plug#end()
 runtime! plugin/sensible.vim
 
@@ -82,8 +70,11 @@ let g:rainbow#colors = {
 \   ]}
 au VimEnter * RainbowParentheses
 
-autocmd VimEnter,BufNewFile,BufReadPost * silent! call HardMode()
-nnoremap <leader>h <Esc>:call ToggleHardMode()<CR>
+set nobackup
+set nowritebackup
+set noswapfile
+set undofile
+set undodir=~/.vim/undo
 
 set backspace=indent,eol,start
 set laststatus=0
@@ -116,11 +107,10 @@ set expandtab
 set hlsearch
 nnoremap <silent> <CR> mx:nohlsearch<CR><CR>`x
 
-if has('unnamedplus')
-    set clipboard=unnamedplus
-else
-    set clipboard=unnamed
-endif
+set clipboard+=unnamedplus
+
+set relativenumber
+set number
 
 cmap w!! w !sudo tee > /dev/null %
 
@@ -190,4 +180,4 @@ let g:VimuxRunnerType = "window"
 
 nmap <c-t> :FZF<CR>
 
-set shell=/bin/bash
+set shell=/usr/local/bin/bash
