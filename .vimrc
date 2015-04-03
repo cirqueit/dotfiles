@@ -84,10 +84,9 @@ set shortmess=at
 nnoremap Y y$
 nnoremap Q @q
 vnoremap Q :norm @q<cr>
-vnoremap < <gv
-vnoremap > >gv
 
 nmap <F1> <nop>
+set pastetoggle=<F2>
 
 set hidden
 set wildmode=list:longest
@@ -179,10 +178,9 @@ vmap <silent> <Leader><Space> "vy :call InstaREPL()<CR>
 nmap <silent> <Leader><Space> :call Insta()<CR>
 nmap <silent> <Leader>c :call VimuxPromptCommand()<CR>
 nmap <silent> <Leader>x :call VimuxCloseRunner()<CR>
-nmap <silent><Leader>p :set paste!<CR>
 let g:VimuxUseNearest = 0
 let g:VimuxRunnerType = "window"
 
 nmap <c-t> :FZF<CR>
 
-set shell=/usr/local/bin/bash
+set shell=/bin/bash

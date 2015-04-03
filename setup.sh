@@ -19,3 +19,5 @@ curl -fLo ~/.vim/autoload/plug.vim https://raw.githubusercontent.com/junegunn/vi
 
 ln -sf ~/.vimrc  ~/.nvimrc
 ln -sf ~/.vim  ~/.nvim
+
+source $(pwd)/git_template.sh
