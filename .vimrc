@@ -51,6 +51,7 @@ Plug 'junegunn/vim-peekaboo'
 Plug 'junegunn/fzf', {'dir': '~/.fzf', 'do': 'yes \| ./install'}
 call plug#end()
 runtime! plugin/sensible.vim
+set laststatus=0
 
 let g:sexp_filetypes = 'clojure,scheme,lisp,timl,hy'
 
@@ -70,16 +71,20 @@ let g:rainbow#colors = {
 \   ]}
 au VimEnter * RainbowParentheses
 
+augroup save
+  au!
+  au FocusLost * wall
+augroup END
+set nohidden
 set nobackup
-set nowritebackup
 set noswapfile
-set undofile
-set undodir=~/.vim/undo
+set nowritebackup
+set autoread
+set autowrite
+set autowriteall
 
-set backspace=indent,eol,start
-set laststatus=0
-set nocompatible
-set shortmess=at
+set undodir=~/.vim/undo
+set undofile
 
 nnoremap Y y$
 nnoremap Q @q
@@ -119,7 +124,6 @@ cmap w!! w !sudo tee > /dev/null %
 
 "tab, then spaces
 :command! -range=% -nargs=0 Stab execute "<line1>,<line2>s/^\\( \\{".&ts."\\}\\)\\+/\\=substitute(submatch(0), ' \\{".&ts."\\}', '\\t', 'g')"
-
 
 function! Insta()
     silent w
