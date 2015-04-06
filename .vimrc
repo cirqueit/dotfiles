@@ -42,6 +42,7 @@ Plug 'dag/vim-fish'
 Plug 'wellle/tmux-complete.vim'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'benmills/vimux'
+Plug 'tmux-plugins/vim-tmux-focus-events'
 
 Plug 'cirqueit/chrome'
 Plug 'cirqueit/vim-invert-marks'
@@ -74,7 +75,10 @@ au VimEnter * RainbowParentheses
 augroup save
   au!
   au FocusLost * wall
+  au FocusLost * silent redraw!
+  au FocusGained * silent redraw!
 augroup END
+
 set nohidden
 set nobackup
 set noswapfile
