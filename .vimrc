@@ -25,10 +25,8 @@ Plug 'tpope/vim-sexp-mappings-for-regular-people'
 Plug 'davidhalter/jedi-vim'
 
 Plug 'plasticboy/vim-markdown'
-Plug 'tpope/vim-haml'
 Plug 'elzr/vim-json'
 Plug 'derekwyatt/vim-scala'
-Plug 'hylang/vim-hy'
 Plug 'pangloss/vim-javascript'
 Plug 'mxw/vim-jsx'
 Plug 'kchmck/vim-coffee-script'
@@ -36,8 +34,6 @@ Plug 'digitaltoad/vim-jade'
 Plug 'wavded/vim-stylus'
 Plug 'othree/html5.vim'
 Plug 'othree/javascript-libraries-syntax.vim'
-Plug 'darkwind-mt/bluespec'
-Plug 'dag/vim-fish'
 
 Plug 'wellle/tmux-complete.vim'
 Plug 'christoomey/vim-tmux-navigator'
@@ -47,17 +43,23 @@ Plug 'tmux-plugins/vim-tmux-focus-events'
 Plug 'cirqueit/chrome'
 Plug 'cirqueit/vim-invert-marks'
 
+Plug 'ajh17/VimCompletesMe'
+
 Plug 'junegunn/rainbow_parentheses.vim'
 Plug 'junegunn/vim-peekaboo'
 Plug 'junegunn/fzf', {'dir': '~/.fzf', 'do': 'yes \| ./install'}
 call plug#end()
 runtime! plugin/sensible.vim
-set laststatus=0
+set laststatus =0
+ 
+au FileType python setlocal completeopt-=preview
+let g:jedi#popup_on_dot = 0
 
-let g:sexp_filetypes = 'clojure,scheme,lisp,timl,hy'
+let g:sexp_filetypes='clojure,scheme,lisp,timl,hy'
 
 let g:jsx_ext_required = 0
 
+let g:matchparen_insert_timeout = 5
 let g:rainbow#max_level = 16
 let g:rainbow#pairs = [['(', ')'], ['[', ']'], ['{', '}']]
 let g:rainbow#colors = {
@@ -129,66 +131,9 @@ cmap w!! w !sudo tee > /dev/null %
 "tab, then spaces
 :command! -range=% -nargs=0 Stab execute "<line1>,<line2>s/^\\( \\{".&ts."\\}\\)\\+/\\=substitute(submatch(0), ' \\{".&ts."\\}', '\\t', 'g')"
 
-function! Insta()
-    silent w
-    if &ft=='clojure'
-        silent Require!
-        call feedkeys("mxcpp`x")
-    elseif &ft =~ '.*\(python\|javascript\|coffee\).*'
-        call feedkeys("mxV\<Space>\<Space>`x")
-    else
-        if !exists("g:VimuxRunnerIndex") || _VimuxHasRunner(g:VimuxRunnerIndex) == -1
-            call VimuxOpenRunner()
-        endif
-        if !exists("g:VimuxLastCommand")
-            let g:VimuxPromptString = "Environment? "
-            call VimuxPromptCommand()
-            let g:VimuxPromptString = "Command? "
-            call VimuxPromptCommand()
-        else
-            call VimuxInterruptRunner()
-            call VimuxRunLastCommand()
-        endif
-    endif
-endfunction
-
-function! InstaREPL()
-    silent w
-    if !exists("g:VimuxRunnerIndex") || _VimuxHasRunner(g:VimuxRunnerIndex) == -1
-        call VimuxOpenRunner()
-        if &ft =~ 'python'
-            call VimuxRunCommand("ipython")
-        elseif &ft =~ 'javascript'
-            call VimuxRunCommand("node")
-        elseif &ft =~ 'coffee'
-            call VimuxRunCommand("coffee")
-        endif
-        sleep 400m
-    endif
-    call VimuxSendText(@v)
-    if @v[-1:] != "\n"
-        call VimuxSendKeys("Enter")
-    endif
-    sleep 50m
-    call system("tmux copy-mode -t ".g:VimuxRunnerIndex)
-    call system("tmux send-keys -t ".g:VimuxRunnerIndex." kvky")
-    sleep 50m
-    let ans = @+
-    let ans = substitute(ans, '^\n*\s*', "", "")
-    let ans = substitute(ans, '\n*$', "", "")
-    let @+ = ans
-    echomsg ans
-endfunction
-
-let g:matchparen_insert_timeout = 5
 let mapleader = " "
-vmap <silent> <Leader><Space> "vy :call InstaREPL()<CR>
-nmap <silent> <Leader><Space> :call Insta()<CR>
-nmap <silent> <Leader>c :call VimuxPromptCommand()<CR>
-nmap <silent> <Leader>x :call VimuxCloseRunner()<CR>
-let g:VimuxUseNearest = 0
-let g:VimuxRunnerType = "window"
-
-nmap <c-t> :FZF<CR>
+nnoremap <silent><leader><space> :Dispatch<CR>
+nnoremap <silent><leader>c :Copen<CR>
+nnoremap <silent><leader>t :FZF<CR>
 
 set shell=/bin/bash
