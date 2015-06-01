@@ -2,7 +2,7 @@ set rtp+=~/.fzf
 
 call plug#begin()
 if has ('nvim')
-    Plug 'floobits/floobits-neovim'
+    " Plug 'floobits/floobits-neovim'
 endif
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
@@ -50,9 +50,12 @@ Plug 'junegunn/vim-peekaboo'
 Plug 'junegunn/fzf', {'dir': '~/.fzf', 'do': 'yes \| ./install'}
 call plug#end()
 runtime! plugin/sensible.vim
-set laststatus =0
- 
+set laststatus=2
+
 au FileType python setlocal completeopt-=preview
+if has('nvim')
+    " let g:jedi#force_py_version=3
+endif
 let g:jedi#popup_on_dot = 0
 
 let g:sexp_filetypes='clojure,scheme,lisp,timl,hy'
@@ -74,20 +77,11 @@ let g:rainbow#colors = {
 \   ]}
 au VimEnter * RainbowParentheses
 
-augroup save
-  au!
-  au FocusLost * wall
-  au FocusLost * silent redraw!
-  au FocusGained * silent redraw!
-augroup END
-
 set nohidden
 set nobackup
 set noswapfile
 set nowritebackup
 set autoread
-set autowrite
-set autowriteall
 
 set undodir=~/.vim/undo
 set undofile
@@ -125,6 +119,7 @@ set clipboard+=unnamedplus
 
 set relativenumber
 set number
+set scrolloff=10
 
 cmap w!! w !sudo tee > /dev/null %
 
@@ -136,14 +131,19 @@ nnoremap <silent><leader><space> :Dispatch<CR>
 nnoremap <silent><leader>c :Copen<CR>
 nnoremap <silent><leader>t :FZF<CR>
 
+autocmd FileType python nunmap <leader><space>
+autocmd FileType python nnoremap <leader><space> :!python %<CR>
+
 if has ('nvim')
     tnoremap <C-[> <C-\><C-n>
     tnoremap <C-h> <C-\><C-n><C-w>h
     tnoremap <C-j> <C-\><C-n><C-w>j
     tnoremap <C-k> <C-\><C-n><C-w>k
     tnoremap <C-l> <C-\><C-n><C-w>l
-    nnoremap <leader>\| :vsp \| term<cr>
+    nnoremap <leader>\ :vsp \| term<cr>
     nnoremap <leader>- :sp \| term<cr>
 endif
+
+set fillchars=vert: 
 
 set shell=/bin/bash
