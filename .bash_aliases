@@ -1,6 +1,8 @@
 alias keys='killall xcape > /dev/null 2>&1; setxkbmap -option ctrl:nocaps && xcape -e "Control_L=Escape"'
 
 alias nv='nvim'
+alias n='nvim'
+alias nt='nvim -c :terminal'
 alias vi='vim'
 
 alias tmux='tmux -2'
@@ -21,6 +23,7 @@ alias ll='ls -l'
 export EDITOR=vim
 export PATH=~/bin:$PATH
 export PYTHONSTARTUP=~/.pythonrc
+export COLORTERM=xterm-256color
 
 set -o vi
 
@@ -123,6 +126,13 @@ z() {
         _z "$@"
     fi
 }
+
+zz() {
+  cd "$(_z -l 2>&1 | sed 's/^[0-9,.]* *//' | fzf -q $_last_z_args)"
+}
+
+alias j=z
+alias jj=zz
 
 v() {
   local files
