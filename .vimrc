@@ -24,11 +24,11 @@ Plug 'tpope/vim-sexp-mappings-for-regular-people'
 
 Plug 'davidhalter/jedi-vim'
 
+Plug 'ajh17/VimCompletesMe'
+
 Plug 'plasticboy/vim-markdown'
-Plug 'tpope/vim-haml'
 Plug 'elzr/vim-json'
 Plug 'derekwyatt/vim-scala'
-Plug 'hylang/vim-hy'
 Plug 'pangloss/vim-javascript'
 Plug 'mxw/vim-jsx'
 Plug 'kchmck/vim-coffee-script'
@@ -36,10 +36,7 @@ Plug 'digitaltoad/vim-jade'
 Plug 'wavded/vim-stylus'
 Plug 'othree/html5.vim'
 Plug 'othree/javascript-libraries-syntax.vim'
-Plug 'darkwind-mt/bluespec'
-Plug 'dag/vim-fish'
 
-Plug 'wellle/tmux-complete.vim'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'benmills/vimux'
 
@@ -51,8 +48,9 @@ Plug 'junegunn/vim-peekaboo'
 Plug 'junegunn/fzf', {'dir': '~/.fzf', 'do': 'yes \| ./install'}
 call plug#end()
 runtime! plugin/sensible.vim
+set laststatus=0
 
-let g:sexp_filetypes = 'clojure,scheme,lisp,timl,hy'
+let g:sexp_filetypes = 'clojure,scheme,lisp'
 
 let g:jsx_ext_required = 0
 
@@ -70,22 +68,24 @@ let g:rainbow#colors = {
 \   ]}
 au VimEnter * RainbowParentheses
 
+au FileType text,markdown let b:vcm_tab_complete = 'dict'
+au FileType python setlocal completeopt-=preview
+let g:jedi#popup_on_dot = 0
+let g:jedi#show_call_signatures = 1
+let g:jedi#auto_close_doc= 1
+
 set nobackup
 set nowritebackup
 set noswapfile
 set undofile
 set undodir=~/.vim/undo
 
-set backspace=indent,eol,start
-set laststatus=0
 set nocompatible
 set shortmess=at
 
 nnoremap Y y$
 nnoremap Q @q
 vnoremap Q :norm @q<cr>
-vnoremap < <gv
-vnoremap > >gv
 
 nmap <F1> <nop>
 
@@ -179,7 +179,7 @@ vmap <silent> <Leader><Space> "vy :call InstaREPL()<CR>
 nmap <silent> <Leader><Space> :call Insta()<CR>
 nmap <silent> <Leader>c :call VimuxPromptCommand()<CR>
 nmap <silent> <Leader>x :call VimuxCloseRunner()<CR>
-nmap <silent><Leader>p :set paste!<CR>
+nmap <silent> <Leader>p :set paste!<CR>
 let g:VimuxUseNearest = 0
 let g:VimuxRunnerType = "window"
 

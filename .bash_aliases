@@ -17,7 +17,7 @@ alias ll='ls -l'
 alias v='vim'
 
 export EDITOR=vim
-export PATH=~/bin:$PATH
+export PATH=~/.cabal/bin:~/bin:$PATH
 
 set -o vi
 
