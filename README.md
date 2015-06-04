@@ -55,6 +55,15 @@
     sudo make install
     pip install neovim
 
+### ctags
+
+    git clone https://github.com/fishman/ctags
+    cd ctags
+    autoreconf
+    ./configure
+    make
+    sudo make install
+
 ### iojs + npm
 
     git clone git://github.com/iojs/io.js

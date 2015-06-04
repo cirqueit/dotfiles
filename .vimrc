@@ -2,7 +2,7 @@ set rtp+=~/.fzf
 
 call plug#begin()
 if has ('nvim')
-    Plug 'floobits/floobits-neovim'
+    " Plug 'floobits/floobits-neovim'
 endif
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
@@ -39,21 +39,32 @@ Plug 'othree/javascript-libraries-syntax.vim'
 
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'benmills/vimux'
+Plug 'tmux-plugins/vim-tmux-focus-events'
 
 Plug 'cirqueit/chrome'
 Plug 'cirqueit/vim-invert-marks'
+
+Plug 'ajh17/VimCompletesMe'
 
 Plug 'junegunn/rainbow_parentheses.vim'
 Plug 'junegunn/vim-peekaboo'
 Plug 'junegunn/fzf', {'dir': '~/.fzf', 'do': 'yes \| ./install'}
 call plug#end()
 runtime! plugin/sensible.vim
+
 set laststatus=0
 
-let g:sexp_filetypes = 'clojure,scheme,lisp'
+au FileType python setlocal completeopt-=preview
+if has('nvim')
+    " let g:jedi#force_py_version=3
+endif
+let g:jedi#popup_on_dot = 0
+
+let g:sexp_filetypes='clojure,scheme,lisp,timl,hy'
 
 let g:jsx_ext_required = 0
 
+let g:matchparen_insert_timeout = 5
 let g:rainbow#max_level = 16
 let g:rainbow#pairs = [['(', ')'], ['[', ']'], ['{', '}']]
 let g:rainbow#colors = {
@@ -74,20 +85,21 @@ let g:jedi#popup_on_dot = 0
 let g:jedi#show_call_signatures = 1
 let g:jedi#auto_close_doc= 1
 
+set nohidden
 set nobackup
-set nowritebackup
 set noswapfile
-set undofile
-set undodir=~/.vim/undo
-
-set nocompatible
+set nowritebackup
+set autoread
 set shortmess=at
+set undodir=~/.vim/undo
+set undofile
 
 nnoremap Y y$
 nnoremap Q @q
 vnoremap Q :norm @q<cr>
 
 nmap <F1> <nop>
+set pastetoggle=<F2>
 
 set hidden
 set wildmode=list:longest
@@ -115,63 +127,20 @@ set clipboard+=unnamedplus
 
 set relativenumber
 set number
+set scrolloff=10
 
 cmap w!! w !sudo tee > /dev/null %
 
 "tab, then spaces
 :command! -range=% -nargs=0 Stab execute "<line1>,<line2>s/^\\( \\{".&ts."\\}\\)\\+/\\=substitute(submatch(0), ' \\{".&ts."\\}', '\\t', 'g')"
 
+let mapleader = " "
+nnoremap <silent><leader><space> :Dispatch<CR>
+nnoremap <silent><leader>c :Copen<CR>
+nnoremap <silent><leader>t :FZF<CR>
 
-function! Insta()
-    silent w
-    if &ft=='clojure'
-        silent Require!
-        call feedkeys("mxcpp`x")
-    elseif &ft =~ '.*\(python\|javascript\|coffee\).*'
-        call feedkeys("mxV\<Space>\<Space>`x")
-    else
-        if !exists("g:VimuxRunnerIndex") || _VimuxHasRunner(g:VimuxRunnerIndex) == -1
-            call VimuxOpenRunner()
-        endif
-        if !exists("g:VimuxLastCommand")
-            let g:VimuxPromptString = "Environment? "
-            call VimuxPromptCommand()
-            let g:VimuxPromptString = "Command? "
-            call VimuxPromptCommand()
-        else
-            call VimuxInterruptRunner()
-            call VimuxRunLastCommand()
-        endif
-    endif
-endfunction
-
-function! InstaREPL()
-    silent w
-    if !exists("g:VimuxRunnerIndex") || _VimuxHasRunner(g:VimuxRunnerIndex) == -1
-        call VimuxOpenRunner()
-        if &ft =~ 'python'
-            call VimuxRunCommand("ipython")
-        elseif &ft =~ 'javascript'
-            call VimuxRunCommand("node")
-        elseif &ft =~ 'coffee'
-            call VimuxRunCommand("coffee")
-        endif
-        sleep 400m
-    endif
-    call VimuxSendText(@v)
-    if @v[-1:] != "\n"
-        call VimuxSendKeys("Enter")
-    endif
-    sleep 50m
-    call system("tmux copy-mode -t ".g:VimuxRunnerIndex)
-    call system("tmux send-keys -t ".g:VimuxRunnerIndex." kvky")
-    sleep 50m
-    let ans = @+
-    let ans = substitute(ans, '^\n*\s*', "", "")
-    let ans = substitute(ans, '\n*$', "", "")
-    let @+ = ans
-    echomsg ans
-endfunction
+autocmd FileType python nunmap <leader><space>
+autocmd FileType python nnoremap <leader><space> :!python %<CR>
 
 let g:matchparen_insert_timeout = 5
 let mapleader = " "
@@ -182,7 +151,16 @@ nmap <silent> <Leader>x :call VimuxCloseRunner()<CR>
 nmap <silent> <Leader>p :set paste!<CR>
 let g:VimuxUseNearest = 0
 let g:VimuxRunnerType = "window"
+if has ('nvim')
+    tnoremap <C-[> <C-\><C-n>
+    tnoremap <C-h> <C-\><C-n><C-w>h
+    tnoremap <C-j> <C-\><C-n><C-w>j
+    tnoremap <C-k> <C-\><C-n><C-w>k
+    tnoremap <C-l> <C-\><C-n><C-w>l
+    nnoremap <leader>\ :vsp \| term<cr>
+    nnoremap <leader>- :sp \| term<cr>
+endif
 
-nmap <c-t> :FZF<CR>
+set fillchars=vert: 
 
-set shell=/usr/local/bin/bash
+set shell=/bin/bash

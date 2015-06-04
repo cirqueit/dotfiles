@@ -1,10 +1,15 @@
-alias ipy='ipython'
-alias r='ranger'
-alias yt='youtube-dl --restrict-filenames'
-alias tmux='tmux -2'
 alias keys='killall xcape > /dev/null 2>&1; setxkbmap -option ctrl:nocaps && xcape -e "Control_L=Escape"'
-alias vi='nvim'
-alias vim='nvim'
+
+alias nv='nvim'
+alias n='nvim'
+alias nt='nvim -c :terminal'
+alias vi='vim'
+
+alias tmux='tmux -2'
+alias t='tmux -2'
+
+alias ipy='ipython'
+alias p='ipython'
 
 alias ..='cd ..'
 alias ...='cd ../..'
@@ -14,10 +19,11 @@ alias ......='cd ../../../../..'
 
 alias l='ls -alF'
 alias ll='ls -l'
-alias v='vim'
 
 export EDITOR=vim
 export PATH=~/.cabal/bin:~/bin:$PATH
+export PYTHONSTARTUP=~/.pythonrc
+export COLORTERM=xterm-256color
 
 set -o vi
 
@@ -30,6 +36,15 @@ fd() {
 
 fda() {
     DIR=`find ${1:-*} -type d 2> /dev/null | fzf-tmux` && cd "$DIR"
+}
+
+fkill() {
+    pid=$(ps -ef | sed 1d | fzf -m | awk '{print $2}')
+
+    if [ "x$pid" != "x" ]
+    then
+        kill -${1:-9} $pid
+    fi
 }
 
 fbr() {
@@ -110,4 +125,19 @@ z() {
     else
         _z "$@"
     fi
+}
+
+zz() {
+  cd "$(_z -l 2>&1 | sed 's/^[0-9,.]* *//' | fzf -q $_last_z_args)"
+}
+
+alias j=z
+alias jj=zz
+
+v() {
+  local files
+  files=$(grep '^>' ~/.viminfo | cut -c3- |
+          while read line; do
+            [ -f "${line/\~/$HOME}" ] && echo "$line"
+          done | fzf-tmux -d -m -q "$*" -1) && vim ${files//\~/$HOME}
 }
