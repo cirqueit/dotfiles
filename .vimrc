@@ -37,7 +37,7 @@ Plug 'tpope/vim-sexp-mappings-for-regular-people'
 " python
 Plug 'davidhalter/jedi-vim'
 
-" web
+" misc languages
 Plug 'plasticboy/vim-markdown'
 Plug 'derekwyatt/vim-scala'
 Plug 'elzr/vim-json'

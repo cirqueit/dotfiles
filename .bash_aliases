@@ -21,7 +21,7 @@ alias l='ls -alF'
 alias ll='ls -l'
 
 export EDITOR=vim
-export PATH=~/bin:$PATH
+export PATH=~/.cabal/bin:~/bin:$PATH
 export PYTHONSTARTUP=~/.pythonrc
 export COLORTERM=xterm-256color
 
