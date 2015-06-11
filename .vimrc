@@ -1,9 +1,8 @@
 set rtp+=~/.fzf
 
 call plug#begin()
-if has ('nvim')
-    " Plug 'floobits/floobits-neovim'
-endif
+
+" pope
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-speeddating'
@@ -16,51 +15,72 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-vinegar'
 Plug 'tpope/vim-sensible'
+Plug 'tpope/vim-sleuth'
 
+" june
+Plug 'junegunn/rainbow_parentheses.vim'
+Plug 'junegunn/fzf', {'dir': '~/.fzf', 'do': 'yes \| ./install'}
+
+" me
+Plug 'cirqueit/chrome'
+Plug 'cirqueit/vim-invert-marks'
+
+" complete
+Plug 'ajh17/VimCompletesMe'
+
+" clojure
 Plug 'guns/vim-clojure-static'
 Plug 'guns/vim-clojure-highlight'
 Plug 'guns/vim-sexp'
 Plug 'tpope/vim-sexp-mappings-for-regular-people'
 
+" python
 Plug 'davidhalter/jedi-vim'
 
+" web
 Plug 'plasticboy/vim-markdown'
-Plug 'elzr/vim-json'
 Plug 'derekwyatt/vim-scala'
+Plug 'elzr/vim-json'
 Plug 'pangloss/vim-javascript'
 Plug 'mxw/vim-jsx'
-Plug 'kchmck/vim-coffee-script'
-Plug 'digitaltoad/vim-jade'
-Plug 'wavded/vim-stylus'
 Plug 'othree/html5.vim'
 Plug 'othree/javascript-libraries-syntax.vim'
 
+" tmux
 Plug 'wellle/tmux-complete.vim'
 Plug 'christoomey/vim-tmux-navigator'
-Plug 'benmills/vimux'
-Plug 'tmux-plugins/vim-tmux-focus-events'
 
-Plug 'cirqueit/chrome'
-Plug 'cirqueit/vim-invert-marks'
-
-Plug 'ajh17/VimCompletesMe'
-
-Plug 'junegunn/rainbow_parentheses.vim'
-Plug 'junegunn/vim-peekaboo'
-Plug 'junegunn/fzf', {'dir': '~/.fzf', 'do': 'yes \| ./install'}
 call plug#end()
-runtime! plugin/sensible.vim
-set laststatus=2
 
+" jedi settings
 au FileType python setlocal completeopt-=preview
 if has('nvim')
-    " let g:jedi#force_py_version=3
+    let g:jedi#force_py_version=3
 endif
 let g:jedi#popup_on_dot = 0
+let g:jedi#goto_command = "[d"
 
-let g:sexp_filetypes='clojure,scheme,lisp,timl,hy'
+" commentary settings
+autocmd Filetype vhdl set commentstring=--\ %s
 
-let g:jsx_ext_required = 0
+" dispatch settings
+autocmd FileType python let b:dispatch = 'python %'
+
+" leader bindings
+let mapleader = " "
+
+nnoremap <silent><leader>p :FZF<CR>
+
+nnoremap <silent><leader><space> :Dispatch<CR>
+nnoremap <silent><leader>d :Dispatch!<CR>
+nnoremap <silent><leader>c :Copen<CR>
+nnoremap <silent><leader>f :Focus
+nnoremap <silent><leader>s :Start
+
+" colorscheme w/ rainbow parenthesis
+set t_Co=256
+set background=dark
+colorscheme chrome
 
 let g:matchparen_insert_timeout = 5
 let g:rainbow#max_level = 16
@@ -77,63 +97,46 @@ let g:rainbow#colors = {
 \   ]}
 au VimEnter * RainbowParentheses
 
-set nohidden
+" persistent undo w/ no backups or swap
+set undofile
+set undodir=~/.vim/undo
+set undolevels=1000
+set undoreload=10000
+set autoread
 set nobackup
 set noswapfile
 set nowritebackup
-set autoread
 
-set undodir=~/.vim/undo
-set undofile
-
-nnoremap Y y$
-nnoremap Q @q
-vnoremap Q :norm @q<cr>
-
-nmap <F1> <nop>
-set pastetoggle=<F2>
-
-set hidden
+" misc settings
+set relativenumber
+set number
+set clipboard+=unnamedplus
 set wildmode=list:longest
-
-set ignorecase
-set smartcase
-set title
+set fillchars=vert: 
+set hidden
 set splitbelow
 set splitright
 set foldlevel=99
-
-set t_Co=256
-set background=dark
-colorscheme chrome
-
-set softtabstop=4 
+set smartcase
+set smarttab
 set shiftwidth=4 
 set tabstop=4
 set expandtab
-
 set hlsearch
+
+" misc bindings
 nnoremap <silent> <CR> mx:nohlsearch<CR><CR>`x
-
-set clipboard+=unnamedplus
-
-set relativenumber
-set number
-set scrolloff=10
-
+nnoremap Y y$
+nnoremap Q @q
+vnoremap Q :norm @q<cr>
+nmap <F1> <nop>
+set pastetoggle=<F2>
 cmap w!! w !sudo tee > /dev/null %
 
-"tab, then spaces
+" tabs to indent then spaces
 :command! -range=% -nargs=0 Stab execute "<line1>,<line2>s/^\\( \\{".&ts."\\}\\)\\+/\\=substitute(submatch(0), ' \\{".&ts."\\}', '\\t', 'g')"
 
-let mapleader = " "
-nnoremap <silent><leader><space> :Dispatch<CR>
-nnoremap <silent><leader>c :Copen<CR>
-nnoremap <silent><leader>t :FZF<CR>
-
-autocmd FileType python nunmap <leader><space>
-autocmd FileType python nnoremap <leader><space> :!python %<CR>
-
+" terminal bindings
 if has ('nvim')
     tnoremap <C-[> <C-\><C-n>
     tnoremap <C-h> <C-\><C-n><C-w>h
@@ -143,7 +146,3 @@ if has ('nvim')
     nnoremap <leader>\ :vsp \| term<cr>
     nnoremap <leader>- :sp \| term<cr>
 endif
-
-set fillchars=vert: 
-
-set shell=/bin/bash
