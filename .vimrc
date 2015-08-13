@@ -66,11 +66,20 @@ autocmd Filetype vhdl set commentstring=--\ %s
 " dispatch settings
 autocmd FileType python let b:dispatch = 'python %'
 
+let g:fzf_action = {
+  \ 'ctrl-m': 'vsplit',
+  \ 'ctrl-v': 'vsplit',
+  \ 'ctrl-x': 'split',
+  \ 'ctrl-e': 'edit',
+  \ 'ctrl-t': 'tabedit',
+\}
+
 " leader bindings
 let mapleader = " "
 let localmapleader = " "
 
 nnoremap <silent><leader><leader> :FZF -m<CR>
+nnoremap <silent><leader>t :FZF -m 
 nnoremap <silent><leader>d :Dispatch<CR>
 nnoremap <silent><leader>D :Dispatch!<CR>
 nnoremap <silent><leader>c :Copen<CR>
