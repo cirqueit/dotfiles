@@ -68,11 +68,11 @@ autocmd FileType python let b:dispatch = 'python %'
 
 " leader bindings
 let mapleader = " "
+let localmapleader = " "
 
-nnoremap <silent><leader>p :FZF<CR>
-
-nnoremap <silent><leader><space> :Dispatch<CR>
-nnoremap <silent><leader>d :Dispatch!<CR>
+nnoremap <silent><leader><leader> :FZF -m<CR>
+nnoremap <silent><leader>d :Dispatch<CR>
+nnoremap <silent><leader>D :Dispatch!<CR>
 nnoremap <silent><leader>c :Copen<CR>
 nnoremap <silent><leader>f :Focus
 nnoremap <silent><leader>s :Start
