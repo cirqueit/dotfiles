@@ -86,11 +86,8 @@
     cd dotfiles && ./setup.sh
     vim -> :PlugInstall
 
-### clojure
+### java8
 
     sudo add-apt-repository ppa:webupd8team/java
     sudo apt-get update
     sudo apt-get install oracle-java8-installer
-    mkdir -p ~/bin
-    curl -fLO https://raw.githubusercontent.com/technomancy/leiningen/stable/bin/lein
-    chmod +x lein
