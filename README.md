@@ -7,10 +7,14 @@
     apt-get update
     apt-get upgrade
     apt-get install sudo
+    apt-get install language-pack-en-base
+    dpkg-reconfigure locales
+    
     apt-get install git build-essential xclip automake autoconf
     apt-get install libevent-dev libncurses-dev pkg-config
     apt-get install wget zip curl cmake python-dev
     apt-get install clang ipython xcape vim-gnome
+ 
 
 ### install openvpn-as
 
@@ -24,11 +28,8 @@
 
 ### add users
 
-    useradd -d /home/xxx -m xxx
-    passwd xxx
-    vim /etc/sudoers
-    xxx ALL=(ALL:ALL) ALL
-    chsh -s /bin/bash xxx
+  adduser USER
+  adduser USER sudo
 
 ## as user
 
@@ -39,10 +40,8 @@
 
 ### tmux
 
-    git clone git://git.code.sf.net/p/tmux/tmux-code tmux
+    git clone https://github.com/tmux/tmux
     cd tmux
-    curl -O https://gist.githubusercontent.com/ArnisL/6156593/raw/fdacd42e7a4ce725605c52655fcc04126630a7e6/tmux_24_bit_colours.c
-    git apply tmux_24_bit_colors.c
     sh autogen.sh
     ./configure && make
     sudo make install
