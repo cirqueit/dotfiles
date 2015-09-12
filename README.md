@@ -10,10 +10,10 @@
     apt-get install language-pack-en-base
     dpkg-reconfigure locales
     
-    apt-get install git build-essential xclip automake autoconf
+    apt-get install git build-essential libtool xclip automake autoconf
     apt-get install libevent-dev libncurses-dev pkg-config
     apt-get install wget zip curl cmake python-dev
-    apt-get install clang ipython xcape vim-gnome
+    apt-get install clang ipython vim-gnome
  
 
 ### install openvpn-as
