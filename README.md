@@ -3,7 +3,7 @@
 ## as root
 
 ### install basics
-    
+   
     apt-get update
     apt-get upgrade
     apt-get install sudo
@@ -63,12 +63,10 @@
     make
     sudo make install
 
-### iojs + npm
+### nodejs
 
-    git clone git://github.com/iojs/io.js
-    cd io.js
-    export CC=/usr/bin/clang
-    export CXX=/usr/bin/clang++
+    git clone https://github.com/nodejs/node
+    cd node
     ./configure && make
     sudo make install
     
@@ -88,12 +86,11 @@
     cd dotfiles && ./setup.sh
     vim -> :PlugInstall
 
-### others
+### clojure
 
     sudo add-apt-repository ppa:webupd8team/java
     sudo apt-get update
     sudo apt-get install oracle-java8-installer
-
-- leiningen (requires java)
-- google drive
-- chrome canary
+    mkdir -p ~/bin
+    curl -fLO https://raw.githubusercontent.com/technomancy/leiningen/stable/bin/lein
+    chmod +x lein
