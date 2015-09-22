@@ -1,3 +1,4 @@
+shopt -s autocd
 alias keys='killall xcape > /dev/null 2>&1; setxkbmap -option ctrl:nocaps && xcape -e "Control_L=Escape"'
 
 alias tmux='tmux -2'
@@ -18,7 +19,9 @@ export COLORTERM=xterm-256color
 
 set -o vi
 
-export FZF_DEFAULT_OPTS='-x'
+export FZF_DEFAULT_OPTS="--extended"
+export FZF_DEFAULT_COMMAND='ag -l -g ""'
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 
 source $HOME/.z.sh
 unalias z 2> /dev/null
@@ -39,17 +42,19 @@ v() {
 }
 
 t() {
-    local session
-    session=$(tmux list-sessions -F "#{session_name}" | \
-    fzf-tmux --query="$1" --select-1 --exit-0)
-    if [[ -z "$TMUX_PANE" ]]; then
-        tmux attach -t "$session"
-    else
-        tmux switch-client -t "$session"
-    fi
+  local session
+  session=$(tmux list-sessions -F "#{session_name}" | \
+    fzf --query="$1" --select-1 --exit-0) &&
+  tmux switch-client -t "$session"
 }
 
 d() {
-    DIR=`find ${1:-*} -path '*/\.*' -prune -o -type d -print 2> /dev/null | fzf-tmux` \
-    && cd "$DIR"
+  local dir
+  dir=$(find ${1:-.} -type d 2> /dev/null | fzf +m) && cd "$dir"
+}
+
+e() {
+  local file
+  file=$(fzf --query="$1" --select-1 --exit-0)
+  [ -n "$file" ] && ${EDITOR:-vim} "$file"
 }

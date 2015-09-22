@@ -3,14 +3,18 @@
 ## as root
 
 ### install basics
-    
+   
     apt-get update
     apt-get upgrade
     apt-get install sudo
-    apt-get install git build-essential xclip automake autoconf
+    apt-get install language-pack-en-base
+    dpkg-reconfigure locales
+    
+    apt-get install git build-essential libtool xclip automake autoconf
     apt-get install libevent-dev libncurses-dev pkg-config
     apt-get install wget zip curl cmake python-dev
-    apt-get install clang ipython xcape vim-gnome
+    apt-get install clang ipython vim-gnome
+ 
 
 ### install openvpn-as
 
@@ -24,11 +28,8 @@
 
 ### add users
 
-    useradd -d /home/xxx -m xxx
-    passwd xxx
-    vim /etc/sudoers
-    xxx ALL=(ALL:ALL) ALL
-    chsh -s /bin/bash xxx
+  adduser USER
+  adduser USER sudo
 
 ## as user
 
@@ -39,10 +40,8 @@
 
 ### tmux
 
-    git clone git://git.code.sf.net/p/tmux/tmux-code tmux
+    git clone https://github.com/tmux/tmux
     cd tmux
-    curl -O https://gist.githubusercontent.com/ArnisL/6156593/raw/fdacd42e7a4ce725605c52655fcc04126630a7e6/tmux_24_bit_colours.c
-    git apply tmux_24_bit_colors.c
     sh autogen.sh
     ./configure && make
     sudo make install
@@ -64,12 +63,10 @@
     make
     sudo make install
 
-### iojs + npm
+### nodejs
 
-    git clone git://github.com/iojs/io.js
-    cd io.js
-    export CC=/usr/bin/clang
-    export CXX=/usr/bin/clang++
+    git clone https://github.com/nodejs/node
+    cd node
     ./configure && make
     sudo make install
     
@@ -89,12 +86,8 @@
     cd dotfiles && ./setup.sh
     vim -> :PlugInstall
 
-### others
-
+### java8
+    sudo apt-get install software-properties-common
     sudo add-apt-repository ppa:webupd8team/java
     sudo apt-get update
     sudo apt-get install oracle-java8-installer
-
-- leiningen (requires java)
-- google drive
-- chrome canary

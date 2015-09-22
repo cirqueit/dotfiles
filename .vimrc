@@ -34,7 +34,6 @@ Plug 'plasticboy/vim-markdown'
 Plug 'elzr/vim-json'
 Plug 'pangloss/vim-javascript'
 Plug 'mxw/vim-jsx'
-" Plug 'ap/vim-css-color'
 Plug 'chrisbra/Colorizer'
 
 " tmux
@@ -44,12 +43,11 @@ Plug 'wellle/tmux-complete.vim'
 call plug#end()
 
 " jedi settings
-au FileType python setlocal completeopt-=preview
 if has('nvim')
     let g:jedi#force_py_version=3
 endif
-let g:jedi#popup_on_dot = 0
 let g:jedi#goto_command = "[d"
+let g:jedi#show_call_signatures = "2"
 
 " commentary settings
 autocmd Filetype vhdl set commentstring=--\ %s
