@@ -5,7 +5,8 @@ call plug#begin()
 " pope
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-speeddating'
-Plug 'tpope/vim-fireplace'
+" Plug 'tpope/vim-fireplace'
+Plug 'christoph-frick/vim-fireplace'
 Plug 'tpope/vim-salve'
 Plug 'tpope/vim-dispatch'
 Plug 'tpope/vim-repeat'
@@ -70,6 +71,7 @@ nnoremap <silent><leader><leader> :Dispatch<CR>
 nnoremap <leader>f :Focus 
 nnoremap <silent><leader>c :ColorToggle<CR>
 nnoremap <silent><leader>r :RainbowParentheses!!<CR>
+nnoremap <silent><leader>p :Piggieback! (do (require 'figwheel-sidecar.repl-api) (figwheel-sidecar.repl-api/cljs-repl))<CR>
 
 " colorscheme w/ rainbow parenthesis
 set t_Co=256
