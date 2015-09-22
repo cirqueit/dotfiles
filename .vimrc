@@ -4,22 +4,20 @@ call plug#begin()
 
 " pope
 Plug 'tpope/vim-surround'
-Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-speeddating'
-Plug 'tpope/vim-leiningen'
-Plug 'tpope/vim-projectionist'
 Plug 'tpope/vim-fireplace'
+Plug 'tpope/vim-salve'
 Plug 'tpope/vim-dispatch'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-vinegar'
-Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-sleuth'
 
 " june
 Plug 'junegunn/rainbow_parentheses.vim'
 Plug 'junegunn/fzf', {'dir': '~/.fzf', 'do': 'yes \| ./install'}
+Plug 'junegunn/fzf.vim'
 
 " me
 Plug 'cirqueit/chrome'
@@ -28,27 +26,20 @@ Plug 'cirqueit/vim-invert-marks'
 " complete
 Plug 'ajh17/VimCompletesMe'
 
-" clojure
-Plug 'guns/vim-clojure-static'
-Plug 'guns/vim-clojure-highlight'
+" languages
 Plug 'guns/vim-sexp'
 Plug 'tpope/vim-sexp-mappings-for-regular-people'
-
-" python
 Plug 'davidhalter/jedi-vim'
-
-" misc languages
 Plug 'plasticboy/vim-markdown'
-Plug 'derekwyatt/vim-scala'
 Plug 'elzr/vim-json'
 Plug 'pangloss/vim-javascript'
 Plug 'mxw/vim-jsx'
-Plug 'othree/html5.vim'
-Plug 'othree/javascript-libraries-syntax.vim'
+" Plug 'ap/vim-css-color'
+Plug 'chrisbra/Colorizer'
 
 " tmux
-Plug 'wellle/tmux-complete.vim'
 Plug 'christoomey/vim-tmux-navigator'
+Plug 'wellle/tmux-complete.vim'
 
 call plug#end()
 
@@ -62,28 +53,31 @@ let g:jedi#goto_command = "[d"
 
 " commentary settings
 autocmd Filetype vhdl set commentstring=--\ %s
+autocmd Filetype clojure set commentstring=;;\ %s
 
 " dispatch settings
 autocmd FileType python let b:dispatch = 'python %'
+
+" completion
+let g:tmuxcomplete#trigger = 'omnifunc'
+let b:vcm_tab_complete = 'omni'
+au FileType text,markdown let b:vcm_tab_complete = 'dict'
 
 " leader bindings
 let mapleader = " "
 let localmapleader = " "
 
-nnoremap <silent><leader><leader> :FZF -m<CR>
-nnoremap <silent><leader>d :Dispatch<CR>
-nnoremap <silent><leader>D :Dispatch!<CR>
-nnoremap <silent><leader>c :Copen<CR>
-nnoremap <silent><leader>f :Focus
-nnoremap <silent><leader>s :Start
+nnoremap <silent><leader>t :FZF -m<CR>
+nnoremap <silent><leader><leader> :Dispatch<CR>
+nnoremap <leader>f :Focus 
+nnoremap <silent><leader>c :ColorToggle<CR>
+nnoremap <silent><leader>r :RainbowParentheses!!<CR>
 
 " colorscheme w/ rainbow parenthesis
 set t_Co=256
 set background=dark
 colorscheme chrome
 
-let g:matchparen_insert_timeout = 5
-let g:rainbow#max_level = 16
 let g:rainbow#pairs = [['(', ')'], ['[', ']'], ['{', '}']]
 let g:rainbow#colors = {
 \   'dark': [
@@ -93,56 +87,38 @@ let g:rainbow#colors = {
 \     ['99',  'white'],
 \     ['92',  'white'],
 \     ['204', 'white'],
-\     ['231', 'white']
+\     ['231', 'white'],
 \   ]}
-au VimEnter * RainbowParentheses
 
-" persistent undo w/ no backups or swap
-set undofile
-set undodir=~/.vim/undo
-set undolevels=1000
-set undoreload=10000
-set autoread
-set nobackup
-set noswapfile
-set nowritebackup
 
 " misc settings
 set relativenumber
 set number
 set clipboard+=unnamedplus
-set wildmode=list:longest
+set wildmode=longest,list
 set fillchars=vert: 
 set hidden
 set splitbelow
 set splitright
 set foldlevel=99
+set ignorecase
 set smartcase
 set smarttab
 set shiftwidth=4 
 set tabstop=4
 set expandtab
 set hlsearch
+set incsearch
+set backspace=indent,eol,start
+set scrolloff=10
+set virtualedit=block
 
 " misc bindings
 nnoremap <silent> <CR> mx:nohlsearch<CR><CR>`x
 nnoremap Y y$
-nnoremap Q @q
-vnoremap Q :norm @q<cr>
 nmap <F1> <nop>
 set pastetoggle=<F2>
 cmap w!! w !sudo tee > /dev/null %
 
 " tabs to indent then spaces
 :command! -range=% -nargs=0 Stab execute "<line1>,<line2>s/^\\( \\{".&ts."\\}\\)\\+/\\=substitute(submatch(0), ' \\{".&ts."\\}', '\\t', 'g')"
-
-" terminal bindings
-if has ('nvim')
-    tnoremap <C-[> <C-\><C-n>
-    tnoremap <C-h> <C-\><C-n><C-w>h
-    tnoremap <C-j> <C-\><C-n><C-w>j
-    tnoremap <C-k> <C-\><C-n><C-w>k
-    tnoremap <C-l> <C-\><C-n><C-w>l
-    nnoremap <leader>\ :vsp \| term<cr>
-    nnoremap <leader>- :sp \| term<cr>
-endif
