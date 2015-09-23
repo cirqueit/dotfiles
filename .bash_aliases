@@ -45,7 +45,11 @@ t() {
   local session
   session=$(tmux list-sessions -F "#{session_name}" | \
     fzf --query="$1" --select-1 --exit-0) &&
-  tmux switch-client -t "$session"
+  if [[ -z "$TMUX_PANE" ]]; then
+      tmux attach -t "$session"
+  else
+      tmux switch-client -t "$session"
+  fi
 }
 
 d() {
