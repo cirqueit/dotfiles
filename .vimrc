@@ -66,12 +66,13 @@ au FileType text,markdown let b:vcm_tab_complete = 'dict'
 let mapleader = " "
 let localmapleader = " "
 
+nnoremap <silent><leader>g :Gstatus<CR>
+nnoremap <silent><leader>p :Gpush<CR>
+nnoremap <silent><leader>P :Gpull<CR>
 nnoremap <silent><leader>t :FZF -m<CR>
 nnoremap <silent><leader><leader> :Dispatch<CR>
 nnoremap <leader>f :Focus 
-nnoremap <silent><leader>c :ColorToggle<CR>
-nnoremap <silent><leader>r :RainbowParentheses!!<CR>
-nnoremap <silent><leader>p :Piggieback! (do (require 'figwheel-sidecar.repl-api) (figwheel-sidecar.repl-api/cljs-repl))<CR>
+nnoremap <silent><leader>r :Piggieback! (do (require 'figwheel-sidecar.repl-api) (figwheel-sidecar.repl-api/cljs-repl))<CR>
 
 " colorscheme w/ rainbow parenthesis
 set t_Co=256
