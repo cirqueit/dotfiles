@@ -1,3 +1,14 @@
+# Fresh Mac deploy
+
+## Install brew
+
+## install basics
+
+    brew install vim
+    brew install tmux
+    brew install git
+    brew install reattach-to-user-namespace
+
 # Fresh Ubuntu deploy
 
 ## as root
