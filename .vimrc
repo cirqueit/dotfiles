@@ -2,12 +2,12 @@ set rtp+=~/.fzf
 
 call plug#begin()
 
+" Shougo
+Plug 'Shougo/deoplete.nvim'
+
 " pope
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-speeddating'
-" Plug 'tpope/vim-fireplace'
-Plug 'christoph-frick/vim-fireplace'
-Plug 'tpope/vim-salve'
 Plug 'tpope/vim-dispatch'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-fugitive'
@@ -22,20 +22,13 @@ Plug 'junegunn/fzf.vim'
 
 " me
 Plug 'cirqueit/chrome'
-Plug 'cirqueit/vim-invert-marks'
-
-" complete
-Plug 'ajh17/VimCompletesMe'
 
 " languages
 Plug 'guns/vim-sexp'
 Plug 'tpope/vim-sexp-mappings-for-regular-people'
-Plug 'davidhalter/jedi-vim'
 Plug 'plasticboy/vim-markdown'
-Plug 'elzr/vim-json'
 Plug 'pangloss/vim-javascript'
 Plug 'mxw/vim-jsx'
-Plug 'chrisbra/Colorizer'
 
 " tmux
 Plug 'christoomey/vim-tmux-navigator'
@@ -43,12 +36,7 @@ Plug 'wellle/tmux-complete.vim'
 
 call plug#end()
 
-" jedi settings
-if has('nvim')
-    let g:jedi#force_py_version=3
-endif
-let g:jedi#goto_command = "[d"
-let g:jedi#show_call_signatures = "2"
+let g:deoplete#enable_at_startup = 1
 
 " commentary settings
 autocmd Filetype vhdl set commentstring=--\ %s
@@ -59,8 +47,6 @@ autocmd FileType python let b:dispatch = 'python %'
 
 " completion
 let g:tmuxcomplete#trigger = 'omnifunc'
-let b:vcm_tab_complete = 'omni'
-au FileType text,markdown let b:vcm_tab_complete = 'dict'
 
 " leader bindings
 let mapleader = " "
@@ -72,30 +58,28 @@ nnoremap <silent><leader>P :Gpull<CR>
 nnoremap <silent><leader>t :FZF -m<CR>
 nnoremap <silent><leader><leader> :Dispatch<CR>
 nnoremap <leader>f :Focus 
-nnoremap <silent><leader>r :Piggieback! (do (require 'figwheel-sidecar.repl-api) (figwheel-sidecar.repl-api/cljs-repl))<CR>
 
 " colorscheme w/ rainbow parenthesis
-set t_Co=256
 set background=dark
 colorscheme chrome
 
 let g:rainbow#pairs = [['(', ')'], ['[', ']'], ['{', '}']]
 let g:rainbow#colors = {
 \   'dark': [
-\     ['119', 'white'],
-\     ['85',  'white'],
-\     ['33',  'white'],
-\     ['99',  'white'],
-\     ['92',  'white'],
-\     ['204', 'white'],
-\     ['231', 'white'],
+\     ['85',  '#00ff00'],
+\     ['33',  '#00ffff'],
+\     ['99',  '#00bfff'],
+\     ['92',  '#836fff'],
+\     ['204', '#ff00ff'],
+\     ['231', '#9830ff'],
+\     ['231', '#00ff7f'],
 \   ]}
-
+autocmd FileType * RainbowParentheses
 
 " misc settings
 set relativenumber
 set number
-set clipboard+=unnamedplus
+set clipboard+=unnamedplus,unnamed
 set wildmode=longest,list
 set fillchars=vert: 
 set hidden

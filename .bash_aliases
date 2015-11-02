@@ -2,6 +2,7 @@ shopt -s autocd
 alias keys='killall xcape > /dev/null 2>&1; setxkbmap -option ctrl:nocaps && xcape -e "Control_L=Escape"'
 
 alias tmux='tmux -2'
+alias vim='NVIM_TUI_ENABLE_TRUE_COLOR=1 nvim'
 
 alias ..='cd ..'
 alias ...='cd ../..'
