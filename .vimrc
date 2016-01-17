@@ -22,6 +22,7 @@ Plug 'junegunn/fzf.vim'
 
 " me
 Plug 'cirqueit/chrome'
+Plug 'ewilazarus/preto'
 
 " languages
 Plug 'guns/vim-sexp'
@@ -42,9 +43,6 @@ let g:deoplete#enable_at_startup = 1
 autocmd Filetype vhdl set commentstring=--\ %s
 autocmd Filetype clojure set commentstring=;;\ %s
 
-" dispatch settings
-autocmd FileType python let b:dispatch = 'python %'
-
 " completion
 let g:tmuxcomplete#trigger = 'omnifunc'
 
@@ -52,19 +50,25 @@ let g:tmuxcomplete#trigger = 'omnifunc'
 let mapleader = " "
 let localmapleader = " "
 
-nnoremap <silent><leader>g :Gstatus<CR>
-nnoremap <silent><leader>p :Gpush<CR>
-nnoremap <silent><leader>P :Gpull<CR>
 nnoremap <silent><leader>t :FZF -m<CR>
-nnoremap <silent><leader><leader> :Dispatch<CR>
-nnoremap <leader>f :Focus 
+nnoremap <silent><leader><leader> :!!<CR>
 
 " colorscheme w/ rainbow parenthesis
 set background=dark
 colorscheme chrome
+" colorscheme preto
 
 let g:rainbow#pairs = [['(', ')'], ['[', ']'], ['{', '}']]
 let g:rainbow#colors = {
+\   'light': [
+\     ['85',  '#00ff00'],
+\     ['33',  '#00ffff'],
+\     ['99',  '#00bfff'],
+\     ['92',  '#836fff'],
+\     ['204', '#ff00ff'],
+\     ['231', '#9830ff'],
+\     ['231', '#00ff7f'],
+\   ],
 \   'dark': [
 \     ['85',  '#00ff00'],
 \     ['33',  '#00ffff'],
