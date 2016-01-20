@@ -9,11 +9,15 @@ alias ....='cd ../../..'
 alias .....='cd ../../../..'
 alias ......='cd ../../../../..'
 
+alias c='clear'
 alias l='ls -alF'
-alias ll='ls -l'
+alias ll='ls -lrt'
 eval "$(thefuck --alias fuck)"
 
-export EDITOR=vim
+alias vi='nvim'
+alias vim='nvim'
+
+export EDITOR=nvim
 export PATH=~/.cabal/bin:~/bin:$PATH
 export PYTHONSTARTUP=~/.pythonrc
 export COLORTERM=xterm-256color
