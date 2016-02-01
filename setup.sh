@@ -27,6 +27,7 @@ curl -fLo ~/bin/lein https://raw.githubusercontent.com/technomancy/leiningen/sta
 chmod +x ~/bin/lein
 
 ln -sf ~/.vimrc  ~/.vim/init.vim
+mkdir -p ~/.config
 ln -sf ~/.vim  ~/.config/nvim
 
 source $(pwd)/git_template.sh
