@@ -26,7 +26,7 @@ mkdir -p ~/bin
 curl -fLo ~/bin/lein https://raw.githubusercontent.com/technomancy/leiningen/stable/bin/lein
 chmod +x ~/bin/lein
 
-ln -sf ~/.vimrc  ~/.nvimrc
-ln -sf ~/.vim  ~/.nvim
+ln -sf ~/.vimrc  ~/.vim/init.vim
+ln -sf ~/.vim  ~/.config/nvim
 
 source $(pwd)/git_template.sh
