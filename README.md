@@ -29,12 +29,8 @@
 
 ### install openvpn-as
 
-    > 32 bit
-    wget http://swupdate.openvpn.org/as/openvpn-as-2.0.12-Ubuntu14.i386.deb
-    dpkg -i openvpn-as-2.0.12-Ubuntu14.i386.deb
-    > 64 bit
-    ?
-
+    wget http://swupdate.openvpn.org/as/openvpn-as-2.0.24-Ubuntu14.amd_64.deb
+    dpkg -i openvpn-as-2.0.24-Ubuntu14.amd_64.deb
     passwd openvpn
 
 ### add users
