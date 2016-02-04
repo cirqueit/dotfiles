@@ -3,6 +3,9 @@
 ln -sf $(pwd)/.vimrc  ~/.vimrc
 ln -sf $(pwd)/.tmux.conf ~/.tmux.conf
 ln -sf $(pwd)/.bash_aliases ~/.bash_aliases
+ln -sf $(pwd)/.bash_prompt ~/.bash_prompt
+echo "source ~/.bash_aliases" >> ~/.bashrc
+echo "source ~/.bash_prompt" >> ~/.bashrc
 cp $(pwd)/.pythonrc ~/.pythonrc
 # mkdir -p ~/.config/ipython/profile_default
 # ln -sf $(pwd)/ipython_config.py ~/.config/ipython/profile_default/ipython_config.py
