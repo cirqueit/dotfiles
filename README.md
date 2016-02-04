@@ -14,13 +14,12 @@
 ## as root
 
 ### install basics
-   
+
     apt-get update
     apt-get upgrade
     apt-get install sudo
     apt-get install language-pack-en-base
     dpkg-reconfigure locales
-    
     apt-get install git build-essential libtool xclip automake autoconf
     apt-get install libevent-dev libncurses-dev pkg-config
     apt-get install wget zip curl cmake python-dev
@@ -29,18 +28,14 @@
 
 ### install openvpn-as
 
-    > 32 bit
-    wget http://swupdate.openvpn.org/as/openvpn-as-2.0.12-Ubuntu14.i386.deb
-    dpkg -i openvpn-as-2.0.12-Ubuntu14.i386.deb
-    > 64 bit
-    ?
-
+    wget http://swupdate.openvpn.org/as/openvpn-as-2.0.24-Ubuntu14.amd_64.deb
+    dpkg -i openvpn-as-2.0.24-Ubuntu14.amd_64.deb
     passwd openvpn
 
 ### add users
 
-  adduser USER
-  adduser USER sudo
+    adduser USER
+    adduser USER sudo
 
 ## as user
 
@@ -92,12 +87,13 @@
     npm install -g react-tools
 
 ### dotfiles
-    
+
     git clone git://github.com/cirqueit/dotfiles
     cd dotfiles && ./setup.sh
     vim -> :PlugInstall
 
 ### java8
+
     sudo apt-get install software-properties-common
     sudo add-apt-repository ppa:webupd8team/java
     sudo apt-get update
