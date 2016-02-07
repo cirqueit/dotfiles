@@ -4,8 +4,9 @@ call plug#begin()
 
 " completion
 Plug 'Shougo/deoplete.nvim'
-Plug 'davidhalter/jedi-vim'
+Plug 'zchee/deoplete-jedi'
 Plug 'ajh17/VimCompletesMe'
+Plug 'wellle/tmux-complete.vim', {'branch': '67-deoplete'}
 
 " pope
 Plug 'tpope/vim-surround'
@@ -34,19 +35,12 @@ Plug 'mxw/vim-jsx'
 
 " tmux
 Plug 'christoomey/vim-tmux-navigator'
-Plug 'wellle/tmux-complete.vim'
 
 call plug#end()
 
 " completion
 let g:deoplete#enable_at_startup = 1
-autocmd FileType python setlocal omnifunc=jedi#completions
 set completeopt-=preview
-let g:jedi#completions_enabled = 0
-let g:jedi#auto_vim_configuration = 0
-let g:jedi#smart_auto_mappings = 0
-let g:jedi#show_call_signatures = 0
-
 
 " commentary settings
 autocmd Filetype vhdl set commentstring=--\ %s
