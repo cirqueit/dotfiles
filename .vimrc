@@ -6,7 +6,7 @@ call plug#begin()
 Plug 'Shougo/deoplete.nvim'
 Plug 'zchee/deoplete-jedi'
 Plug 'ajh17/VimCompletesMe'
-Plug 'wellle/tmux-complete.vim', {'branch': '67-deoplete'}
+Plug 'wellle/tmux-complete.vim'
 
 " pope
 Plug 'tpope/vim-surround'
@@ -32,6 +32,7 @@ Plug 'tpope/vim-sexp-mappings-for-regular-people'
 Plug 'plasticboy/vim-markdown'
 Plug 'pangloss/vim-javascript'
 Plug 'mxw/vim-jsx'
+Plug 'kballard/vim-swift'
 
 " tmux
 Plug 'christoomey/vim-tmux-navigator'
