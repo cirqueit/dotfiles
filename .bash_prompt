@@ -12,6 +12,8 @@ local_username=jedwards
 
 # Colors
 RED="$(tput setaf 1)"
+TEAL="$(tput setaf 85)"
+VIOLET="$(tput setaf 99)"
 GREEN="$(tput setaf 2)"
 YELLOW="$(tput setaf 3)"
 BLUE="$(tput setaf 4)"
@@ -26,7 +28,7 @@ NOCOLOR="$(tput sgr0)"
 
 # User color
 case $(id -u) in
-	0) user_color="$RED" ;;  # root
+	0) user_color="$VIOLET" ;;  # root
 	*) user_color="$GREEN" ;;
 esac
 
@@ -57,7 +59,7 @@ function prompt_command() {
 
 		# Format Git info
 		if [ -n "$dirty" ]; then
-			git_prompt=" $RED$prompt_dirty_symbol$branch$NOCOLOR"
+			git_prompt=" $VIOLET$prompt_dirty_symbol$branch$NOCOLOR"
 		else
 			git_prompt=" $GREEN$prompt_clean_symbol$branch$NOCOLOR"
 		fi
@@ -85,11 +87,11 @@ function prompt_command() {
 	first_line="$user_prompt$host_prompt$login_delimiter$WHITE\w$NOCOLOR$git_prompt$venv_prompt"
 	# Text (commands) inside \[...\] does not impact line length calculation which fixes stange bug when looking through the history
 	# $? is a status of last command, should be processed every time prompt prints
-	second_line="\`if [ \$? = 0 ]; then echo \[\$CYAN\]; else echo \[\$RED\]; fi\`\$prompt_symbol\[\$NOCOLOR\] "
+	second_line="\`if [ \$? = 0 ]; then echo \[\$TEAL\]; else echo \[\$VIOLET\]; fi\`\$prompt_symbol\[\$NOCOLOR\] "
 	PS1="\n$first_line\n$second_line"
 
 	# Multiline command
-	PS2="\[$CYAN\]$prompt_symbol\[$NOCOLOR\] "
+	PS2="\[$TEAL\]$prompt_symbol\[$NOCOLOR\] "
 
 	# Terminal title
 	local title="$(basename "$PWD")"
