@@ -29,7 +29,7 @@ NOCOLOR="$(tput sgr0)"
 # User color
 case $(id -u) in
 	0) user_color="$VIOLET" ;;  # root
-	*) user_color="$GREEN" ;;
+	*) user_color="$TEAL" ;;
 esac
 
 # Symbols
@@ -61,7 +61,7 @@ function prompt_command() {
 		if [ -n "$dirty" ]; then
 			git_prompt=" $VIOLET$prompt_dirty_symbol$branch$NOCOLOR"
 		else
-			git_prompt=" $GREEN$prompt_clean_symbol$branch$NOCOLOR"
+			git_prompt=" $TEAL$prompt_clean_symbol$branch$NOCOLOR"
 		fi
 	fi
 
