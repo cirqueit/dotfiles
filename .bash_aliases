@@ -2,6 +2,7 @@ shopt -s autocd
 alias keys='killall xcape > /dev/null 2>&1; setxkbmap -option ctrl:nocaps && xcape -e "Control_L=Escape"'
 
 alias tmux='tmux -2'
+alias nu='nvm use --delete-prefix'
 
 alias ..='cd ..'
 alias ...='cd ../..'
@@ -16,6 +17,12 @@ eval "$(thefuck --alias fuck)"
 
 alias vi='nvim'
 alias vim='nvim'
+
+if [ !$DISPLAY ]; then
+  if [ "$SSH_CLIENT" ]; then
+    export DISPLAY=:0
+  fi
+fi
 
 export EDITOR=nvim
 export PATH=~/.cabal/bin:~/bin:$PATH

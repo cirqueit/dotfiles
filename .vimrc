@@ -52,6 +52,7 @@ autocmd Filetype clojure set commentstring=;;\ %s
 let mapleader = " "
 let localmapleader = " "
 
+inoremap jj <ESC>
 nnoremap <silent><leader>t :FZF -m<CR>
 nnoremap <silent><leader><leader> :!!<CR>
 
