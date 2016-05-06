@@ -27,7 +27,7 @@ fi
 export EDITOR=nvim
 export PATH=~/.cabal/bin:~/bin:$PATH
 export PYTHONSTARTUP=~/.pythonrc
-export COLORTERM=xterm-256color
+export COLORTERM=screen-256color
 
 set -o vi
 

@@ -34,3 +34,5 @@ mkdir -p ~/.config
 ln -sf ~/.vim  ~/.config/nvim
 
 source $(pwd)/git_template.sh
+
+curl https://raw.githubusercontent.com/seebi/dircolors-solarized/master/dircolors.256dark > ~/.dircolors
