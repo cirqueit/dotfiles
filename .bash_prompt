@@ -8,6 +8,7 @@
 # - $local_username - username you don’t want to see in the prompt - can be defined in ~/.bashlocal : `local_username="admin"`
 # - Colors ($RED, $GREEN) - defined in ../tilde/bash_profile.bash
 #
+eval `dircolors ~/.dircolors`
 local_username=jedwards
 
 # Colors
@@ -28,8 +29,8 @@ NOCOLOR="$(tput sgr0)"
 
 # User color
 case $(id -u) in
-	0) user_color="$VIOLET" ;;  # root
-	*) user_color="$CYAN" ;;
+	0) user_color="$RED" ;;  # root
+	*) user_color="$TEAL" ;;
 esac
 
 # Symbols
@@ -59,9 +60,9 @@ function prompt_command() {
 
 		# Format Git info
 		if [ -n "$dirty" ]; then
-			git_prompt=" $VIOLET$prompt_dirty_symbol$branch$NOCOLOR"
+			git_prompt=" $RED$prompt_dirty_symbol$branch$NOCOLOR"
 		else
-			git_prompt=" $CYAN$prompt_clean_symbol$branch$NOCOLOR"
+			git_prompt=" $TEAL$prompt_clean_symbol$branch$NOCOLOR"
 		fi
 	fi
 
@@ -77,21 +78,21 @@ function prompt_command() {
 
 	# Show hostname inside SSH session
 	local host_prompt=
-	[ -n "$remote" ] && host_prompt="@$WHITE$HOSTNAME$NOCOLOR"
+	[ -n "$remote" ] && host_prompt="@$TEAL$HOSTNAME$NOCOLOR"
 
 	# Show delimiter if user or host visible
 	local login_delimiter=
 	[ -n "$user_prompt" ] || [ -n "$host_prompt" ] && login_delimiter=":"
 
 	# Format prompt
-	first_line="$user_prompt$host_prompt$login_delimiter$WHITE\w$NOCOLOR$git_prompt$venv_prompt"
+	first_line="$user_prompt$host_prompt$login_delimiter$TEAL\w$NOCOLOR$git_prompt$venv_prompt"
 	# Text (commands) inside \[...\] does not impact line length calculation which fixes stange bug when looking through the history
 	# $? is a status of last command, should be processed every time prompt prints
-	second_line="\`if [ \$? = 0 ]; then echo \[\$CYAN\]; else echo \[\$VIOLET\]; fi\`\$prompt_symbol\[\$NOCOLOR\] "
+	second_line="\`if [ \$? = 0 ]; then echo \[\$TEAL\]; else echo \[\$RED\]; fi\`\$prompt_symbol\[\$NOCOLOR\] "
 	PS1="\n$first_line\n$second_line"
 
 	# Multiline command
-	PS2="\[$CYAN\]$prompt_symbol\[$NOCOLOR\] "
+	PS2="\[$TEAL\]$prompt_symbol\[$NOCOLOR\] "
 
 	# Terminal title
 	local title="$(basename "$PWD")"
