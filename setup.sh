@@ -29,6 +29,7 @@ mkdir -p ~/bin
 curl -fLo ~/bin/lein https://raw.githubusercontent.com/technomancy/leiningen/stable/bin/lein
 chmod +x ~/bin/lein
 
+ln -sf ~/.viminfo  ~/.vim/shada/main.shada
 ln -sf ~/.vimrc  ~/.vim/init.vim
 mkdir -p ~/.config
 ln -sf ~/.vim  ~/.config/nvim
