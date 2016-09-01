@@ -56,6 +56,7 @@ let localmapleader = " "
 
 " inoremap fd <ESC>
 nnoremap <silent><leader>t :FZF -m<CR>
+nnoremap <silent><leader>c :Codi!!<CR>
 nnoremap <silent><leader><leader> :!!<CR>
 
 " colorscheme w/ rainbow parenthesis
