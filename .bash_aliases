@@ -15,8 +15,8 @@ alias l='ls -alF'
 alias ll='ls -lrt'
 eval "$(thefuck --alias fuck)"
 
-alias vi='nvim'
-alias vim='nvim'
+alias ec='emacsclient -t'
+type nvim >/dev/null 2>&1 && alias vim=nvim
 
 if [ !$DISPLAY ]; then
   if [ "$SSH_CLIENT" ]; then

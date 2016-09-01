@@ -9,6 +9,7 @@ Plug 'ajh17/VimCompletesMe'
 Plug 'wellle/tmux-complete.vim'
 
 " pope
+Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-speeddating'
 Plug 'tpope/vim-dispatch'
@@ -37,6 +38,8 @@ Plug 'kballard/vim-swift'
 " tmux
 Plug 'christoomey/vim-tmux-navigator'
 
+Plug 'metakirby5/codi.vim'
+
 call plug#end()
 
 " completion
@@ -47,12 +50,11 @@ set completeopt-=preview
 autocmd Filetype vhdl set commentstring=--\ %s
 autocmd Filetype clojure set commentstring=;;\ %s
 
-
 " leader bindings
 let mapleader = " "
 let localmapleader = " "
 
-inoremap jj <ESC>
+" inoremap fd <ESC>
 nnoremap <silent><leader>t :FZF -m<CR>
 nnoremap <silent><leader><leader> :!!<CR>
 
