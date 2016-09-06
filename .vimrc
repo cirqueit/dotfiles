@@ -38,9 +38,13 @@ Plug 'kballard/vim-swift'
 " tmux
 Plug 'christoomey/vim-tmux-navigator'
 
+" scratchpad
 Plug 'metakirby5/codi.vim'
 
 call plug#end()
+
+" tmux
+nnoremap <bs> :<c-u>TmuxNavigateLeft<cr>
 
 " completion
 let g:deoplete#enable_at_startup = 1
@@ -54,7 +58,6 @@ autocmd Filetype clojure set commentstring=;;\ %s
 let mapleader = " "
 let localmapleader = " "
 
-" inoremap fd <ESC>
 nnoremap <silent><leader>t :FZF -m<CR>
 nnoremap <silent><leader>c :Codi!!<CR>
 nnoremap <silent><leader><leader> :!!<CR>
