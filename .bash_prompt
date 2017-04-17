@@ -26,6 +26,7 @@ BOLD="$(tput bold)"
 UNDERLINE="$(tput sgr 0 1)"
 INVERT="$(tput sgr 1 0)"
 NOCOLOR="$(tput sgr0)"
+NOCOLOR="$(tput setaf 7)"
 
 # User color
 case $(id -u) in

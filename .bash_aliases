@@ -1,8 +1,10 @@
 shopt -s autocd
-alias keys='killall xcape > /dev/null 2>&1; setxkbmap -option ctrl:nocaps && xcape -e "Control_L=Escape"'
+alias keys='killall xcape > /dev/null 2>&1; xcape -e "Control_L=Escape"'
+
+alias ipusb='sudo /usr/lib/linux-lts-utopic-tools-3.16.0-62/usbip'
+alias ipusbd='sudo /usr/lib/linux-lts-utopic-tools-3.16.0-62/usbipd'
 
 alias tmux='tmux -2'
-alias nu='nvm use --delete-prefix'
 
 alias ..='cd ..'
 alias ...='cd ../..'
@@ -10,19 +12,17 @@ alias ....='cd ../../..'
 alias .....='cd ../../../..'
 alias ......='cd ../../../../..'
 
-alias c='clear'
 alias l='ls -alF'
 alias ll='ls -lrt'
-eval "$(thefuck --alias fuck)"
 
-alias ec='emacsclient -t'
 type nvim >/dev/null 2>&1 && alias vim=nvim
+type nvim >/dev/null 2>&1 && alias vi="nvim -u NONE"
 
-if [ !$DISPLAY ]; then
-  if [ "$SSH_CLIENT" ]; then
-    export DISPLAY=:0
-  fi
-fi
+# if [ !$DISPLAY ]; then
+#   if [ "$SSH_CLIENT" ]; then
+#     export DISPLAY=:0
+#   fi
+# fi
 
 export EDITOR=nvim
 export PATH=~/.cabal/bin:~/bin:$PATH
@@ -30,47 +30,8 @@ export PYTHONSTARTUP=~/.pythonrc
 export COLORTERM=screen-256color
 
 set -o vi
+bind -m vi-insert "\C-l":clear-screen
 
-export FZF_DEFAULT_OPTS="--extended"
-export FZF_DEFAULT_COMMAND='ag -l -g ""'
-export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
-
-source $HOME/.z.sh
-unalias z 2> /dev/null
-z() {
-    if [[ -z "$*" ]]; then
-        cd "$(_z -l 2>&1 | fzf-tmux +s --tac | sed 's/^[0-9,.]* *//')"
-    else
-        _z "$@"
-    fi
-}
-
-v() {
-  local files
-  files=$(grep '^>' ~/.viminfo | cut -c3- |
-          while read line; do
-            [ -f "${line/\~/$HOME}" ] && echo "$line"
-          done | fzf-tmux -d -m -q "$*" -1) && vim ${files//\~/$HOME}
-}
-
-t() {
-  local session
-  session=$(tmux list-sessions -F "#{session_name}" | \
-    fzf --query="$1" --select-1 --exit-0) &&
-  if [[ -z "$TMUX_PANE" ]]; then
-      tmux attach -t "$session"
-  else
-      tmux switch-client -t "$session"
-  fi
-}
-
-d() {
-  local dir
-  dir=$(find ${1:-.} -type d 2> /dev/null | fzf +m) && cd "$dir"
-}
-
-e() {
-  local file
-  file=$(fzf --query="$1" --select-1 --exit-0)
-  [ -n "$file" ] && ${EDITOR:-vim} "$file"
-}
+# export FZF_DEFAULT_OPTS="--extended"
+# export FZF_DEFAULT_COMMAND='ag -l -g ""'
+# export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"

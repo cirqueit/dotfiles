@@ -1,9 +1,10 @@
 set rtp+=~/.fzf
-
+   
 call plug#begin()
 
 " completion
-Plug 'Shougo/deoplete.nvim'
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'mhartington/nvim-typescript'
 Plug 'zchee/deoplete-jedi'
 Plug 'ajh17/VimCompletesMe'
 Plug 'wellle/tmux-complete.vim'
@@ -43,8 +44,12 @@ Plug 'metakirby5/codi.vim'
 
 call plug#end()
 
+set noswapfile
+set nobackup
+set nowritebackup
+
 " tmux
-nnoremap <bs> :<c-u>TmuxNavigateLeft<cr>
+nnoremap <silent><bs> :<c-u>TmuxNavigateLeft<cr>
 
 " completion
 let g:deoplete#enable_at_startup = 1
@@ -58,9 +63,20 @@ autocmd Filetype clojure set commentstring=;;\ %s
 let mapleader = " "
 let localmapleader = " "
 
+autocmd Filetype python let b:dispatch='python %'
+
 nnoremap <silent><leader>t :FZF -m<CR>
 nnoremap <silent><leader>c :Codi!!<CR>
-nnoremap <silent><leader><leader> :!!<CR>
+nnoremap <silent><leader><leader> :Dispatch<CR>
+" nnoremap <silent><leader><leader> :Focus 
+
+" codi
+" let g:codi#autocmd = "None"
+" autocmd Filetype clojure Codi
+
+" autocmd Filetype python Codi
+" autocmd Filetype python nnoremap <silent><leader><leader> :CodiUpdate<CR>
+
 
 " colorscheme w/ rainbow parenthesis
 set background=dark
